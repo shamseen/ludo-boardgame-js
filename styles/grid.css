@@ -1,0 +1,49 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "board board board board"
+      "board board board board"
+      "board board board board";
+  }
+  
+  .board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "base-red base-red base-red base-red base-red . . . base-blue base-blue base-blue base-blue base-blue"
+      "base-red base-red base-red base-red base-red . home-blue . base-blue base-blue base-blue base-blue base-blue"
+      "base-red base-red base-red base-red base-red . home-blue . base-blue base-blue base-blue base-blue base-blue"
+      "base-red base-red base-red base-red base-red . home-blue . base-blue base-blue base-blue base-blue base-blue"
+      "base-red base-red base-red base-red base-red . home-blue . base-blue base-blue base-blue base-blue base-blue"
+      ". . . . . . home-blue . . . . . ."
+      ". home-red home-red home-red home-red home-red . home-yellow home-yellow home-yellow home-yellow home-yellow ."
+      ". . . . . . home-green . . . . . ."
+      "base-green base-green base-green base-green base-green . home-green . base-yellow base-yellow base-yellow base-yellow base-yellow"
+      "base-green base-green base-green base-green base-green . home-green . base-yellow base-yellow base-yellow base-yellow base-yellow"
+      "base-green base-green base-green base-green base-green . home-green . base-yellow base-yellow base-yellow base-yellow base-yellow"
+      "base-green base-green base-green base-green base-green . home-green . base-yellow base-yellow base-yellow base-yellow base-yellow"
+      "base-green base-green base-green base-green base-green . . . base-yellow base-yellow base-yellow base-yellow base-yellow";
+    grid-area: board;
+  }
+  
+  .base-red { grid-area: base-red; }
+  
+  .base-blue { grid-area: base-blue; }
+  
+  .base-yellow { grid-area: base-yellow; }
+  
+  .base-green { grid-area: base-green; }
+  
+  .home-blue { grid-area: home-blue; }
+  
+  .home-yellow { grid-area: home-yellow; }
+  
+  .home-green { grid-area: home-green; }
+  
+  .home-red { grid-area: home-red; }
+  

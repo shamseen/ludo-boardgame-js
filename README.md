@@ -3,15 +3,24 @@
 *inspired by the game [Ludo](https://en.wikipedia.org/wiki/Ludo_(board_game)), derived from Pachisi - originally developed in India circa 6th century C.E.*
 
 ___
+### Planning:
+- CSS grid mockup using [Layoutit Grid](https://grid.layoutit.com/)
+- - <details>
+    <summary> diagram </summary>
+    ![Grid diagram](/markdown/img/ludo-grid.png?raw=true)
+    </details>
+
 <details>
   <summary>copypasta overview</summary>
   
 Pandemic is a cooperative strategy game where multiple players work to cure four dangerous diseases before they take over the world. In this adaptation, two players are up against four deadly diseases. With each turn, they draw a new card which offers potential for treating or curing disease, but they also confront a new disease infection site.
 </details>
 
+
 ### Game summary (WIP):
  - 44 spaces
  - 
+
 <details>
   <summary>(copypasta)</summary>
  48 worldwide cities are displayed on a central console. Four diseases are endemic in the game universe, each represented by a different color (yellow, blue, black, and red). The goal of the game is to cure all four diseases before one of them takes over the world. Players work together to accomplish this goal: humanity's fate is in the balance!
@@ -25,6 +34,8 @@ Players are dealt a random starting hand of four cards each. Each card represent
 - SCSS: Grid, Flexbox, modals, animation, and media query
 - JavaScript: loops, math methods/randomization, array methods, combined datatypes, event listeners, callback and recursive functions
 ___
+
+
 ## Lessons/Ongoing Issues:
 
 <details>
