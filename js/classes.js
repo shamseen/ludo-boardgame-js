@@ -18,7 +18,7 @@ class Player {
 }
 
 class Piece {
-    spaceNum = -1; // in base area
+    spaceNum = 0; // in base area
 
     constructor() {
 

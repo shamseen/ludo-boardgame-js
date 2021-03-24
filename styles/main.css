@@ -12,6 +12,8 @@
   float: center;
   height: auto;
   background: #E7E5DB;
+  background-size: contain;
+  background-repeat: no-repeat;
   margin: 0;
   border-style: solid;
 
