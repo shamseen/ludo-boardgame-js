@@ -147,9 +147,17 @@ html, body, .grid-container { height: 100%; margin: 0; }
   position: relative;
 }
 
-.grid-container *:after {
-  content:attr(class);
-  position: absolute;
-  top: 0;
-  left: 0;
+/* Board spaces */
+
+.space {
+  float: center;
+  height: auto;
+  background: #E7E5DB;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0;
+  border-style: solid;
+
+  /* limiting squares per row https://stackoverflow.com/a/48464559 */
+  flex:0 0 8%
 }
