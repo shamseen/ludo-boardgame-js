@@ -63,6 +63,7 @@ html, body, .grid-container { height: 100%; margin: 0; }
     ". home-yellow ."
     ". home-yellow ."
     ". home-yellow .";
+  grid-auto-flow: column;
   grid-area: arm-2;
 }
 
@@ -112,6 +113,7 @@ html, body, .grid-container { height: 100%; margin: 0; }
     ". home-blue ."
     ". home-blue ."
     ". . .";
+    grid-auto-flow: column;
   grid-area: arm-4;
 }
 
