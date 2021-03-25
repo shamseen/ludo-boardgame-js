@@ -29,6 +29,7 @@ function layoutPath() {
     fillPath();
 
     /*  assigning them to grids (see wireframe) */
+
     // first half of arm1
     for (let i = 0; i < homeLane + 1; i++) {
         arm1.appendChild(path[i]);

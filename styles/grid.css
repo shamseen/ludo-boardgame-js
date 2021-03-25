@@ -113,7 +113,7 @@ html, body, .grid-container { height: 100%; margin: 0; }
     ". home-blue ."
     ". home-blue ."
     ". . .";
-    grid-auto-flow: column;
+  grid-auto-flow: column;
   grid-area: arm-4;
 }
 

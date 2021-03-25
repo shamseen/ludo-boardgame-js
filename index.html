@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ludo!</title>
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/grid.css">
     <!-- scripts -->
-    <script src="elements/path-leg.js"></script>
     <script src="js/classes.js"></script>
     <script src="js/grid-board.js" defer></script>
     <script src="app.js" defer></script>
@@ -20,28 +20,27 @@
         <button id="p2Roll">player 2 roll</button>
     </div>
 
-    <!-- TBD: CSS GRID -->
-    <link rel="stylesheet" href="styles/grid.css">
     </link>
     <div class="grid-container">
         <div class="board">
-          <div class="base-red"></div>
-          <div class="base-yellow"></div>
-        <div class="base-blue"></div>
-          <div class="base-green"></div>
-        <div class="arm-1">
-            <div class="home-red"></div>
-        </div>
-        <div class="arm-2">
-            <div class="home-yellow"></div>
-        </div>
-        <div class="arm-3">
-            <div class="home-green"></div>
-        </div>
-        <div class="arm-4">
-            <div class="home-blue"></div>
-        </div>
-          <div class="win"></div>
+            <div class="base-red"></div>
+            <div class="base-yellow"></div>
+            <div class="base-blue"></div>
+            <div class="base-green"></div>
+            <!-- player path -->
+            <div class="arm-1">
+                <div class="home-red"></div>
+            </div>
+            <div class="arm-2">
+                <div class="home-yellow"></div>
+            </div>
+            <div class="arm-3">
+                <div class="home-green"></div>
+            </div>
+            <div class="arm-4">
+                <div class="home-blue"></div>
+            </div>
+            <div class="win"></div>
         </div>
       </div>
 </body>
