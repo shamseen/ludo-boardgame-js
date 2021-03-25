@@ -10,7 +10,8 @@
     <!-- scripts -->
     <script src="elements/path-leg.js"></script>
     <script src="js/classes.js"></script>
-    <script src="app.js" defer></script>
+    <!-- <script src="app.js" defer></script> -->
+    <script src="js/grid-board.js" defer></script>
 </head>
 
 <body>
@@ -18,21 +19,23 @@
         <button id="p1Roll">player 1 roll</button>
         <button id="p2Roll">player 2 roll</button>
     </div>
-    <div id="board"></div>
+
     <!-- TBD: CSS GRID -->
-    <!-- <script src="styles/grid.css"></script>
-        <div class="grid-container">
-            <div class="board">
-                <div class="base-red"></div>
-                <div class="base-blue"></div>
-                <div class="base-yellow"></div>
-                <div class="base-green"></div>
-                <div class="home-blue"></div>
-                <div class="home-yellow"></div>
-                <div class="home-green"></div>
-                <div class="home-red"></div>
-            </div>
-        </div> -->
+    <link rel="stylesheet" href="styles/grid.css">
+    </link>
+    <div class="grid-container">
+        <div class="board">
+        <div class="base-red"></div>
+          <div class="base-yellow"></div>
+          <div class="base-green"></div>
+        <div class="base-blue"></div>
+          <div class="home-yellow"></div>
+        <div class="home-blue"></div>
+          <div class="home-green"></div>
+          <div class="home-red"></div>
+        <div class="win"></div>
+        </div>
+    </div>
 </body>
 
 </html>
