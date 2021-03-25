@@ -2,7 +2,7 @@ html, body, .grid-container { height: 100%; margin: 0; }
 
 .grid-container {
   display: grid;
-  grid-template-columns: 0.3fr 2.4fr 0.3fr;
+  grid-template-columns: 0.4fr 2.2fr 0.4fr;
   grid-template-rows: 1.8fr 0.2fr;
   gap: 0px 0px;
   grid-template-areas:
@@ -12,23 +12,13 @@ html, body, .grid-container { height: 100%; margin: 0; }
 
 .board {
   display: grid;
-  grid-template-columns: repeat(13, 1fr);
-  grid-template-rows: repeat(13, 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "base-red base-red base-red base-red base-red . . . base-yellow base-yellow base-yellow base-yellow base-yellow"
-    "base-red base-red base-red base-red base-red . home-yellow . base-yellow base-yellow base-yellow base-yellow base-yellow"
-    "base-red base-red base-red base-red base-red . home-yellow . base-yellow base-yellow base-yellow base-yellow base-yellow"
-    "base-red base-red base-red base-red base-red . home-yellow . base-yellow base-yellow base-yellow base-yellow base-yellow"
-    "base-red base-red base-red base-red base-red . home-yellow . base-yellow base-yellow base-yellow base-yellow base-yellow"
-    ". . . . . . home-yellow . . . . . ."
-    ". home-red home-red home-red home-red home-red win home-blue home-blue home-blue home-blue home-blue ."
-    ". . . . . . home-green . . . . . ."
-    "base-green base-green base-green base-green base-green . home-green . base-blue base-blue base-blue base-blue base-blue"
-    "base-green base-green base-green base-green base-green . home-green . base-blue base-blue base-blue base-blue base-blue"
-    "base-green base-green base-green base-green base-green . home-green . base-blue base-blue base-blue base-blue base-blue"
-    "base-green base-green base-green base-green base-green . home-green . base-blue base-blue base-blue base-blue base-blue"
-    "base-green base-green base-green base-green base-green . . . base-blue base-blue base-blue base-blue base-blue";
+    "base-red arm-2 base-yellow"
+    "arm-1 win arm-3"
+    "base-blue arm-4 base-green";
   grid-area: board;
 }
 
@@ -36,16 +26,138 @@ html, body, .grid-container { height: 100%; margin: 0; }
 
 .base-yellow { grid-area: base-yellow; }
 
-.base-green { grid-area: base-green; }
-
 .base-blue { grid-area: base-blue; }
 
-.home-yellow { grid-area: home-yellow; }
+.base-green { grid-area: base-green; }
 
-.home-blue { grid-area: home-blue; }
+.arm-1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . ."
+    ". home-red home-red home-red home-red"
+    ". . . . .";
+  grid-area: arm-1;
+}
 
-.home-green { grid-area: home-green; }
+.home-red {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . .";
+  grid-area: home-red;
+}
 
-.home-red { grid-area: home-red; }
+.arm-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". home-yellow ."
+    ". home-yellow ."
+    ". home-yellow ."
+    ". home-yellow .";
+  grid-auto-flow: column;
+  grid-area: arm-2;
+}
 
-.win { grid-area: win; }
+.home-yellow {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+  grid-area: home-yellow;
+}
+
+.arm-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . ."
+    "home-green home-green home-green home-green ."
+    ". . . . .";
+  grid-area: arm-3;
+}
+
+.home-green {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . .";
+  grid-area: home-green;
+}
+
+.arm-4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". home-blue ."
+    ". home-blue ."
+    ". home-blue ."
+    ". home-blue ."
+    ". . .";
+  grid-auto-flow: column;
+  grid-area: arm-4;
+}
+
+.home-blue {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+  grid-area: home-blue;
+}
+
+.win {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ".";
+  grid-area: win;
+}
+
+
+/* For presentation only, no need to copy the code below */
+.grid-container * {
+  border: 1px solid red;
+  position: relative;
+}
+
+/* Board spaces */
+
+.space {
+  float: center;
+  height: auto;
+  background: #E7E5DB;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0;
+  border-style: solid;
+
+  /* limiting squares per row https://stackoverflow.com/a/48464559 */
+  flex:0 0 8%
+}

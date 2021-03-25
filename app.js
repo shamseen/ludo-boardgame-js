@@ -4,15 +4,18 @@ const diceP1 = document.querySelector('#p1Roll');
 const diceP2 = document.querySelector('#p2Roll');
 
 /* ---- Global Variables ---- */
-const whiteSpaces = 48; // total num before home stretch
+// From grid-board.js:
+// // const homeLane = 4;
+// // const pathLength = 44;
+// // const path = [ ... ];
 
 // different colors / positions for player to pick
 // class definitions: see ./js/classes.js
 const pTypes = {
     R: new Player('red', 0),
-    G: new Player('green', whiteSpaces * (1 / 4)),
-    B: new Player('blue', whiteSpaces * (2 / 4)),
-    Y: new Player('yellow', whiteSpaces * (3 / 4))
+    G: new Player('green', pathLength * (1 / 4)),
+    B: new Player('blue', pathLength * (2 / 4)),
+    Y: new Player('yellow', pathLength * (3 / 4))
 }
 
 // for now, only 2 players
@@ -31,22 +34,9 @@ const gameState = {
 }
 
 /* ---- Executing code ---- */
-makeBoard();
 mockGame(); // for testing
 
 /* ---- Functions ---- */
-
-function makeBoard() {
-    for (let i = 0; i < whiteSpaces; i++) {
-        const sp = document.createElement('div');
-        sp.className = 'space';
-        sp.innerText = `Space ${i + 1}`;
-        sp.id = i + 1;
-
-        board.appendChild(sp);
-    }
-}
-
 function mockGame() {
     // just testing, these won't be the final icons
     players.p1.img = 'https://static.thenounproject.com/png/57226-200.png';
@@ -63,10 +53,10 @@ function movePiece(p) {
     console.log(`old ${before}\nnew ${after}\n`);
 
     // update UI
-    // document.getElementById(`${before}`).style.backgroundImage = 'none';
-    document.getElementById(`${after}`).style.backgroundImage = `url(${p.img})`;
+    path[after - 1].style.backgroundImage = `url(${p.img})`
+
     // // remove background if piece wasn't in the base area
-    if (before > 0) { document.getElementById(`${before}`).style.backgroundImage = 'none'; }
+    if (before > 0) { path[before - 1].style.backgroundImage = 'none'; }
 
     // TO DO: overlapping
 
