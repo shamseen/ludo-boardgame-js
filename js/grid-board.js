@@ -6,26 +6,41 @@ const homeLane = 4;
 const pathLength = 44;
 
 /* ---- DOM Elements ---- */
+// defining all home stretch grids; src: https://stackoverflow.com/a/26625391
+const stretches = document.querySelectorAll('[class*="home"]');
+fillHomeStretch();
+
+// defining all aspects of path
 const arm1 = document.querySelector('.arm-1');
 const arm2 = document.querySelector('.arm-2');
 const arm3 = document.querySelector('.arm-3');
 const arm4 = document.querySelector('.arm-4');
-const path = new Array();
+const path = new Array(); // holds spaces
 layoutPath();
 
-function fillPath() {
-    for (let i = 0; i < pathLength; i++) {
+function addSpaces(numSpaces, container, className) {
+    for (let i = 0; i < numSpaces; i++) {
         const sp = document.createElement('div');
-        sp.className = 'space';
+        sp.classList.add('space', className);
         sp.id = i;
 
-        path.push(sp);
+        if (Array.isArray(container)) {
+            container.push(sp)
+        } else {
+            container.appendChild(sp);
+        }
     }
+}
+
+function fillHomeStretch() {
+    stretches.forEach((grid) => {
+        addSpaces(homeLane, grid, grid.className);
+    });
 }
 
 function layoutPath() {
     // making the divs
-    fillPath();
+    addSpaces(pathLength, path, 'path');
 
     /*  assigning them to grids (see wireframe) */
 

@@ -1,163 +1,150 @@
-html, body, .grid-container { height: 100%; margin: 0; }
+html, body, .grid-container {
+  height: 100%;
+  margin: 0;
+}
 
 .grid-container {
   display: grid;
   grid-template-columns: 0.4fr 2.2fr 0.4fr;
   grid-template-rows: 1.8fr 0.2fr;
   gap: 0px 0px;
-  grid-template-areas:
-    ". board ."
-    ". . .";
+  grid-template-areas: ". board ." ". . .";
+  position: relative;
 }
 
 .board {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template: 210px 126px 15 210px 126px;
   gap: 0px 0px;
-  grid-template-areas:
-    "base-red arm-2 base-yellow"
-    "arm-1 win arm-3"
-    "base-blue arm-4 base-green";
+  grid-template-areas: "base-red arm-2 base-yellow" "arm-1 win arm-3" "base-blue arm-4 base-green";
   grid-area: board;
+  position: relative;
+  aspect-ratio: 1/1;
+  height: 100vh;
 }
 
-.base-red { grid-area: base-red; }
+.base-red {
+  grid-area: base-red;
+}
 
-.base-yellow { grid-area: base-yellow; }
+.base-yellow {
+  grid-area: base-yellow;
+}
 
-.base-blue { grid-area: base-blue; }
+.base-blue {
+  grid-area: base-blue;
+}
 
-.base-green { grid-area: base-green; }
+.base-green {
+  grid-area: base-green;
+}
 
 .arm-1 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template: repeat(3, 42px)/repeat(5, 42px);
   gap: 0px 0px;
-  grid-template-areas:
-    ". . . . ."
-    ". home-red home-red home-red home-red"
-    ". . . . .";
+  grid-template-areas: ". . . . ." ". home-red home-red home-red home-red" ". . . . .";
   grid-area: arm-1;
-}
-
-.home-red {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    ". . . .";
-  grid-area: home-red;
-}
-
-.arm-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    ". . ."
-    ". home-yellow ."
-    ". home-yellow ."
-    ". home-yellow ."
-    ". home-yellow .";
-  grid-auto-flow: column;
-  grid-area: arm-2;
-}
-
-.home-yellow {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas:
-    "."
-    "."
-    "."
-    ".";
-  grid-area: home-yellow;
 }
 
 .arm-3 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template: repeat(3, 42px)/repeat(5, 42px);
   gap: 0px 0px;
-  grid-template-areas:
-    ". . . . ."
-    "home-green home-green home-green home-green ."
-    ". . . . .";
+  grid-template-areas: ". . . . ." "home-green home-green home-green home-green ." ". . . . .";
   grid-area: arm-3;
 }
 
-.home-green {
+.arm-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
+  grid-template: repeat(5, 42px)/repeat(3, 42px);
   gap: 0px 0px;
-  grid-template-areas:
-    ". . . .";
-  grid-area: home-green;
+  grid-template-areas: ". . ." ". home-yellow ." ". home-yellow ." ". home-yellow ." ". home-yellow .";
+  grid-auto-flow: column;
+  grid-area: arm-2;
 }
 
 .arm-4 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template: repeat(5, 42px)/repeat(3, 42px);
   gap: 0px 0px;
-  grid-template-areas:
-    ". home-blue ."
-    ". home-blue ."
-    ". home-blue ."
-    ". home-blue ."
-    ". . .";
+  grid-template-areas: ". home-blue ." ". home-blue ." ". home-blue ." ". home-blue ." ". . .";
   grid-auto-flow: column;
   grid-area: arm-4;
 }
 
+.home-red {
+  display: grid;
+  grid-template: 42px/repeat(4, 42px);
+  gap: 0px 0px;
+  grid-template-areas: ". . . .";
+  grid-auto-flow: row;
+  grid-area: home-red;
+}
+
+.home-green {
+  display: grid;
+  grid-template: 42px/repeat(4, 42px);
+  gap: 0px 0px;
+  grid-template-areas: ". . . .";
+  grid-auto-flow: row;
+  grid-area: home-green;
+}
+
+.home-yellow {
+  display: grid;
+  grid-template: repeat(4, 42px)/42px;
+  gap: 0px 0px;
+  grid-template-areas: "." "." "." ".";
+  grid-auto-flow: column;
+  grid-area: home-yellow;
+}
+
 .home-blue {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template: repeat(4, 42px)/42px;
   gap: 0px 0px;
-  grid-template-areas:
-    "."
-    "."
-    "."
-    ".";
+  grid-template-areas: "." "." "." ".";
+  grid-auto-flow: column;
   grid-area: home-blue;
 }
 
 .win {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  grid-template: 1;
   gap: 0px 0px;
-  grid-template-areas:
-    ".";
+  grid-template-areas: ".";
   grid-area: win;
 }
 
-
-/* For presentation only, no need to copy the code below */
-.grid-container * {
-  border: 1px solid red;
-  position: relative;
-}
-
-/* Board spaces */
-
 .space {
-  float: center;
+  display: block;
   height: auto;
-  background: #E7E5DB;
-  background-size: contain;
-  background-repeat: no-repeat;
+  background: center/contain no-repeat;
   margin: 0;
-  border-style: solid;
-
-  /* limiting squares per row https://stackoverflow.com/a/48464559 */
-  flex:0 0 8%
+  border: 1px solid;
+  height: 40px;
+  width: 40px;
 }
+.space.path {
+  background-color: #E7E5DB;
+  border-color: grey;
+}
+.space[class*=red] {
+  background-color: rgba(252, 72, 72, 0.774);
+  border-color: #b30000;
+}
+.space[class*=green] {
+  background-color: rgba(252, 72, 72, 0.774);
+  border-color: #b30000;
+}
+.space[class*=blue] {
+  background-color: rgba(252, 72, 72, 0.774);
+  border-color: #b30000;
+}
+.space[class*=yellow] {
+  background-color: rgba(252, 72, 72, 0.774);
+  border-color: #b30000;
+}
+
+/*# sourceMappingURL=grid.css.map */

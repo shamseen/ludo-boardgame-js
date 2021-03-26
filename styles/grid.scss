@@ -1,0 +1,190 @@
+// Functions
+// @function gridTrack($size, $amt){
+//     $track: ();
+
+//     @for $_ from 1 through $amt {
+//         $track
+//     }
+// }
+
+// Global Variables
+$square: 40px;
+$cell: $square + 2; //accounting for border
+
+html, body, .grid-container { height: 100%; margin: 0; }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.4fr 2.2fr 0.4fr;
+  grid-template-rows: 1.8fr 0.2fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". board ."
+    ". . .";
+  position: relative;
+}
+
+.board {
+    display: grid;
+    grid-template: $cell*5 $cell*3 $cell*5 / $cell*3 $cell*5 $cell*3;
+    gap: 0px 0px;
+    grid-template-areas:
+      "base-red arm-2 base-yellow"
+      "arm-1 win arm-3"
+      "base-blue arm-4 base-green";
+    grid-area: board;
+    position: relative;
+    aspect-ratio: 1/1;
+    height: 100vh;
+  }
+  .base-red { grid-area: base-red; }
+
+  .base-yellow { grid-area: base-yellow; }
+  
+  .base-blue { grid-area: base-blue; }
+  
+  .base-green { grid-area: base-green; }
+  
+//   horizontal arrms
+  .arm-1 {
+    display: grid;
+    grid-template: repeat(3, $cell) / repeat(5, $cell);
+    gap: 0px 0px;
+    grid-template-areas:
+      ". . . . ."
+      ". home-red home-red home-red home-red"
+      ". . . . .";
+    grid-area: arm-1;
+  }
+
+  .arm-3 {
+    display: grid;
+    grid-template: repeat(3, $cell) / repeat(5, $cell);
+    gap: 0px 0px;
+    grid-template-areas:
+      ". . . . ."
+      "home-green home-green home-green home-green ."
+      ". . . . .";
+    grid-area: arm-3;
+  }
+  
+  .arm-2 {
+    display: grid;
+    grid-template: repeat(5, $cell) / repeat(3, $cell);
+    gap: 0px 0px;
+    grid-template-areas:
+      ". . ."
+      ". home-yellow ."
+      ". home-yellow ."
+      ". home-yellow ."
+      ". home-yellow .";
+    grid-auto-flow: column;
+    grid-area: arm-2;
+  }
+  
+    // vertical arms
+  .arm-4 {
+    display: grid;
+    grid-template: repeat(5, $cell) / repeat(3, $cell);
+    gap: 0px 0px;
+    grid-template-areas:
+      ". home-blue ."
+      ". home-blue ."
+      ". home-blue ."
+      ". home-blue ."
+      ". . .";
+    grid-auto-flow: column;
+    grid-area: arm-4;
+  }
+
+//   horizontal lanes
+  .home-red {
+    display: grid;
+    grid-template: $cell / repeat(4, $cell);
+    gap: 0px 0px;
+    grid-template-areas:
+      ". . . .";
+    grid-auto-flow: row;
+    grid-area: home-red;
+  }
+
+  .home-green {
+    display: grid;
+    grid-template: $cell / repeat(4, $cell);
+    gap: 0px 0px;
+    grid-template-areas:
+      ". . . .";
+    grid-auto-flow: row;
+    grid-area: home-green;
+  }
+
+//   vertical lanes
+
+  .home-yellow {
+    display: grid;
+    grid-template: repeat(4, $cell) / $cell;
+    gap: 0px 0px;
+    grid-template-areas:
+      "."
+      "."
+      "."
+      ".";
+    grid-auto-flow: column;
+    grid-area: home-yellow;
+  }
+
+ 
+  .home-blue {
+    display: grid;
+    grid-template: repeat(4, $cell) / $cell;
+    gap: 0px 0px;
+    grid-template-areas:
+      "."
+      "."
+      "."
+      ".";
+    grid-auto-flow: column;
+    grid-area: home-blue;
+  }
+  
+  .win {
+    display: grid;
+    grid-template: $cell / $cell;
+    gap: 0px 0px;
+    grid-template-areas:
+      ".";
+    grid-area: win;
+  }
+
+.space {
+    display: block;
+    height: auto;
+    background: center / contain no-repeat ;
+    margin: 0;
+    border: 1px solid;
+    height: min($square);
+    width: min($square);
+
+    &.path {
+        background-color: #E7E5DB;
+        border-color: grey;
+    }
+
+    &[class*="red"] {
+        background-color: rgba(252, 72, 72, 0.774);
+        border-color: rgb(179, 0, 0);
+    }
+
+    &[class*="green"] {
+        background-color: rgba(252, 72, 72, 0.774);
+        border-color: rgb(179, 0, 0);
+    }
+    &[class*="blue"] {
+        background-color: rgba(252, 72, 72, 0.774);
+        border-color: rgb(179, 0, 0);
+    }
+    &[class*="yellow"] {
+        background-color: rgba(252, 72, 72, 0.774);
+        border-color: rgb(179, 0, 0);
+    }
+}
