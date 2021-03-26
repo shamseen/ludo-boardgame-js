@@ -70,6 +70,11 @@ function letsPlay() {
         movePiece(piece, roll.sum);
     }
 
+    // check if piece has entered home stretch
+    if (piece.pathLeft < 0) {
+        enterHomeStretch(piece);
+    }
+
     // TO DO: allow player to split roll
 
 
@@ -78,6 +83,14 @@ function letsPlay() {
 
 
 /* ---- Functions ---- */
+function enterHomeStretch(piece) {
+    console.log(`${game.currentPl.color}'s piece entered the home stretch!`);
+    alert(`${game.currentPl.color}'s piece entered the home stretch!`);
+    // TO DO: define home stretch
+    // TO DO: Show piece to home stretch
+    // TO DO: enter home area logic
+}
+
 function mockGame() {
     // just testing, these won't be the final icons
     players.p1.img = 'https://static.thenounproject.com/png/57225-200.png';
@@ -87,11 +100,15 @@ function mockGame() {
 function movePiece(piece, move) {
 
     const oldSpace = piece.spaceNum;
-    const newSpace = oldSpace + move;
+    let newSpace = oldSpace + move;
+
 
     console.log(move);
 
     console.log(`old ${oldSpace}\nnew ${newSpace}\n`);
+
+    // colors moving past red's home stretch (into space1)
+    newSpace = newSpace >= pathLength ? newSpace - pathLength : newSpace;
 
     // update object
     piece.spaceNum = newSpace;
@@ -104,6 +121,7 @@ function movePiece(piece, move) {
         alert(`${game.currentPl.color} moved ${move} spaces`);
 
         piece.pathLeft -= move; // closer to home stretch
+        console.log(piece.pathLeft);
     }
 }
 
@@ -115,6 +133,7 @@ function moveToStart(piece) {
 
     // tell player
     confirm(`${game.currentPl.color} got a piece on the board!`);
+    console.log(`${game.currentPl.color} got a piece on the board!`);
 }
 
 function prettyPrint(obj) {
@@ -137,7 +156,12 @@ function rolledSix() {
 
     /* - IF: first turn - */
     // set piece on start
-    moveToStart(game.currentPl.pieces[0]);
+    if (game.currentPl.onBoard === 0) {
+        moveToStart(game.currentPl.pieces[0]);
+    } 
+    else { // not first turn, move by whole roll
+        movePiece(game.currentPl.pieces[0], roll.sum);
+    }
 }
 
 /* ---- Event Handlers ---- */

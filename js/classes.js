@@ -18,7 +18,7 @@ class Player {
 
 class Piece {
     spaceNum = -1; // in base area
-    pathLeft = 44; // how far to home stretch
+    pathLeft = 43; // how far to home stretch
 
     constructor() {
 
