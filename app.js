@@ -57,11 +57,21 @@ game.gameOver = false;
 // Game logic
 function letsPlay() {
 
+    const piece = game.currentPl.pieces[0]; // TO DO: let player choose
     rollDice();
 
+    // check if rules of six applies
     if (roll.hasSix()) {
         rolledSix();
     }
+
+    // otherwise move piece forward
+    if (game.currentPl.onBoard > 0) {
+        movePiece(piece, roll.sum);
+    }
+
+    // TO DO: allow player to split roll
+
 
     game.changeTurn();
 }
@@ -94,6 +104,17 @@ function movePiece(piece, move) {
         alert(`${game.currentPl.color} moved ${move} spaces`);
     }
 }
+
+function moveToStart(piece) {
+    // update objects
+    movePiece(piece, game.currentPl.startSp + 1);
+    game.currentPl.onBoard += 1;
+    roll.sum -= 6; // remainder to be used on pieces
+
+    // tell player
+    confirm(`${game.currentPl.color} got a piece on the board!`);
+}
+
 function prettyPrint(obj) {
     console.log(JSON.stringify(obj, null, 4));
 }
@@ -110,16 +131,11 @@ function rollDice() {
 
 function rolledSix() {
     /* - IF: player has any pieces at base */
-
-    // IF no pieces on board, set piece on start
-    movePiece(game.currentPl.pieces[0], game.currentPl.startSp + 1);
-    confirm(`${game.currentPl.color} got a piece on the board!`);
-
-    // move piece with remaining roll
-    movePiece(game.currentPl.pieces[0], roll.sum - 6);
-
     // TO DO: pick which piece, if any
 
+    /* - IF: first turn - */
+    // set piece on start
+    moveToStart(game.currentPl.pieces[0]);
 }
 
 /* ---- Event Handlers ---- */

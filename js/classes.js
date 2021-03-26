@@ -3,6 +3,7 @@ class Player {
     constructor(color, startSp) {
         this.color = color;
         this.startSp = startSp;
+        this.onBoard = 0;
 
         this.pieces = [];
         this.createPieces(); // four pieces
