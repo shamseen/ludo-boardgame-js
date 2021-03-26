@@ -1,7 +1,7 @@
 /* ---- DOM Elements ---- */
 const board = document.querySelector('#board');
-const diceP1 = document.querySelector('#p1Roll');
-const diceP2 = document.querySelector('#p2Roll');
+const rollBtn = document.querySelector('#roll');
+const dice = document.querySelector('.dice');
 
 /* ---- Global Variables ---- */
 // From grid-board.js:
@@ -26,11 +26,23 @@ const players = {
     p2: pTypes.Y
 }
 
+// 2 dice
+const roll = {
+    A: undefined,
+    B: undefined,
+    sum: undefined,
+    hasSix() {
+        return (this.A === 6 || this.B === 6);
+    }
+}
+
 // storing whose turn and changing turns
 const game = {
     currentPl: players.p1,
     changeTurn() {
         this.currentPl = this.currentPl === players.p1 ? players.p2 : players.p1;
+        rollBtn.innerText = `${this.currentPl.color} player roll`;
+        console.log(this.currentPl);
     },
     gameOver: false
 }
@@ -41,17 +53,19 @@ const game = {
 mockGame();
 game.gameOver = false;
 
-// Game logic
-do {
-    // TO DO: confirm start
-    const roll = rollDice(game.currentPl);
-    console.log(roll);
 
-    if (roll.includes(6)) {
+// Game logic
+function letsPlay() {
+
+    rollDice();
+
+    if (roll.hasSix()) {
         rolledSix();
-        game.changeTurn();
     }
-} while (!game.gameOver);
+
+    game.changeTurn();
+}
+
 
 /* ---- Functions ---- */
 function mockGame() {
@@ -60,9 +74,12 @@ function mockGame() {
     players.p2.img = 'https://static.thenounproject.com/png/57226-200.png';
 }
 
-function movePiece(piece, newSpace) {
-    console.log(newSpace);
+function movePiece(piece, move) {
+
     const oldSpace = piece.spaceNum;
+    const newSpace = oldSpace + move;
+
+    console.log(move);
 
     console.log(`old ${oldSpace}\nnew ${newSpace}\n`);
 
@@ -74,42 +91,38 @@ function movePiece(piece, newSpace) {
 
     if (oldSpace > -1) {
         path[oldSpace].style.backgroundImage = 'none';
+        alert(`${game.currentPl.color} moved ${move} spaces`);
     }
-
-    if (game.currentPl === players.p2) {
-        console.log(game.currentPl)
-        game.gameOver = true;
-    }
-
 }
-const prettyPrint = (obj) => {
+function prettyPrint(obj) {
     console.log(JSON.stringify(obj, null, 4));
 }
 
-function rollDice(p) {
-    // 2 dice
-    const d1 = Math.floor(Math.random() * 6) + 1;
-    const d2 = Math.floor(Math.random() * 6) + 1;
-    console.log(`first ${d1}\nsecond ${d2}\n`);
+function rollDice() {
+    roll.A = Math.floor(Math.random() * 6) + 1;
+    roll.B = Math.floor(Math.random() * 6) + 1;
+    console.log(`first ${roll.A}\nsecond ${roll.B}\n`);
 
-    return [d1, d2];
+    roll.sum = roll.A + roll.B;
+
+    dice.innerText = JSON.stringify(roll, null, 4);
 }
 
 function rolledSix() {
     /* - IF: player has any pieces at base */
+
     // IF no pieces on board, set piece on start
-    movePiece(game.currentPl.pieces[0], game.currentPl.startSp)
+    movePiece(game.currentPl.pieces[0], game.currentPl.startSp + 1);
+    confirm(`${game.currentPl.color} got a piece on the board!`);
+
+    // move piece with remaining roll
+    movePiece(game.currentPl.pieces[0], roll.sum - 6);
 
     // TO DO: pick which piece, if any
 
 }
 
 /* ---- Event Handlers ---- */
-// diceP1.addEventListener('click', () => {
-
-//     move(players.p1);
-// });
-
-// diceP2.addEventListener('click', () => {
-//     move(players.p2);
-// })
+rollBtn.addEventListener('click', () => {
+    letsPlay();
+})

@@ -8,20 +8,16 @@
     <title>Ludo!</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/grid.css">
-    <!-- scripts -->
-    <script src="js/classes.js"></script>
-    <script src="js/grid-board.js" defer></script>
-    <script src="app.js" defer></script>
+
 </head>
 
 <body>
-    <div id="controls">
-        <button id="p1Roll">player 1 roll</button>
-        <button id="p2Roll">player 2 roll</button>
-    </div>
 
     </link>
     <div class="grid-container">
+        <div class="dice">
+        
+        </div>
         <div class="board">
             <div class="base-red"></div>
             <div class="base-yellow"></div>
@@ -40,9 +36,15 @@
             <div class="arm-4">
                 <div class="home-blue"></div>
             </div>
-            <div class="win"></div>
+            <div class="win">
+                <button id="roll">red player roll</button>
+            </div>
         </div>
-      </div>
+    </div>
+    <!-- scripts -->
+    <script src="js/classes.js"></script>
+    <script src="js/grid-board.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
