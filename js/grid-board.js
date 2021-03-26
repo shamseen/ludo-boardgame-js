@@ -17,8 +17,8 @@ function fillPath() {
     for (let i = 0; i < pathLength; i++) {
         const sp = document.createElement('div');
         sp.className = 'space';
-        sp.innerText = `Space ${i + 1}`;
-        sp.id = i + 1;
+        sp.innerText = `Space ${i}`;
+        sp.id = i;
 
         path.push(sp);
     }

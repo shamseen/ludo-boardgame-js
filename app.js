@@ -13,9 +13,10 @@ const diceP2 = document.querySelector('#p2Roll');
 // class definitions: see ./js/classes.js
 const pTypes = {
     R: new Player('red', 0),
-    G: new Player('green', pathLength * (1 / 4)),
-    B: new Player('blue', pathLength * (2 / 4)),
-    Y: new Player('yellow', pathLength * (3 / 4))
+    Y: new Player('yellow', pathLength * (1 / 4)),
+    G: new Player('green', pathLength * (2 / 4)),
+    B: new Player('blue', pathLength * (3 / 4)),
+
 }
 
 // for now, only 2 players
@@ -26,39 +27,59 @@ const players = {
 }
 
 // storing whose turn and changing turns
-const gameState = {
-    currentTurn: players.p1,
-    updateTurn() {
-        this.currentTurn = this.currentTurn === players.p1 ? players.p2 : players.p1;
-    }
+const game = {
+    currentPl: players.p1,
+    changeTurn() {
+        this.currentPl = this.currentPl === players.p1 ? players.p2 : players.p1;
+    },
+    gameOver: false
 }
 
 /* ---- Executing code ---- */
-mockGame(); // for testing
+
+// test
+mockGame();
+game.gameOver = false;
+
+// Game logic
+do {
+    // TO DO: confirm start
+    const roll = rollDice(game.currentPl);
+    console.log(roll);
+
+    if (roll.includes(6)) {
+        rolledSix();
+        game.changeTurn();
+    }
+} while (!game.gameOver);
 
 /* ---- Functions ---- */
 function mockGame() {
     // just testing, these won't be the final icons
-    players.p1.img = 'https://static.thenounproject.com/png/57226-200.png';
-    players.p2.img = 'https://static.thenounproject.com/png/57225-200.png';
+    players.p1.img = 'https://static.thenounproject.com/png/57225-200.png';
+    players.p2.img = 'https://static.thenounproject.com/png/57226-200.png';
 }
 
-function movePiece(p) {
-    const before = p.pieces[0].spaceNum;
-    const move = rollDice();
-    const after = before + move;
+function movePiece(piece, newSpace) {
+    console.log(newSpace);
+    const oldSpace = piece.spaceNum;
+
+    console.log(`old ${oldSpace}\nnew ${newSpace}\n`);
 
     // update object
-    p.pieces[0].spaceNum = after;
-    console.log(`old ${before}\nnew ${after}\n`);
+    piece.spaceNum = newSpace;
 
     // update UI
-    path[after - 1].style.backgroundImage = `url(${p.img})`
+    path[newSpace].style.backgroundImage = `url(${game.currentPl.img})`
 
-    // // remove background if piece wasn't in the base area
-    if (before > 0) { path[before - 1].style.backgroundImage = 'none'; }
+    if (oldSpace > -1) {
+        path[oldSpace].style.backgroundImage = 'none';
+    }
 
-    // TO DO: overlapping
+    if (game.currentPl === players.p2) {
+        console.log(game.currentPl)
+        game.gameOver = true;
+    }
 
 }
 const prettyPrint = (obj) => {
@@ -70,14 +91,25 @@ function rollDice(p) {
     const d1 = Math.floor(Math.random() * 6) + 1;
     const d2 = Math.floor(Math.random() * 6) + 1;
     console.log(`first ${d1}\nsecond ${d2}\n`);
-    return d1 + d2;
+
+    return [d1, d2];
+}
+
+function rolledSix() {
+    /* - IF: player has any pieces at base */
+    // IF no pieces on board, set piece on start
+    movePiece(game.currentPl.pieces[0], game.currentPl.startSp)
+
+    // TO DO: pick which piece, if any
+
 }
 
 /* ---- Event Handlers ---- */
-diceP1.addEventListener('click', () => {
-    movePiece(players.p1);
-});
+// diceP1.addEventListener('click', () => {
 
-diceP2.addEventListener('click', () => {
-    movePiece(players.p2);
-})
+//     move(players.p1);
+// });
+
+// diceP2.addEventListener('click', () => {
+//     move(players.p2);
+// })

@@ -1,8 +1,8 @@
 /* ---- Class Definitions ---- */
 class Player {
-    constructor(color, baseNum) {
+    constructor(color, startSp) {
         this.color = color;
-        this.baseNum = baseNum;
+        this.startSp = startSp;
 
         this.pieces = [];
         this.createPieces(); // four pieces
@@ -18,7 +18,7 @@ class Player {
 }
 
 class Piece {
-    spaceNum = 0; // in base area
+    spaceNum = -1; // in base area
 
     constructor() {
 
