@@ -31,27 +31,47 @@ function layoutPath() {
     /*  assigning them to grids (see wireframe) */
 
     // first half of arm1
-    for (let i = 0; i < homeLane + 1; i++) {
+    for (let i = 0; i < pathLength; i++) {
+
+        // first half of arm1
+        if (i < 5) {
         arm1.appendChild(path[i]);
-    }
+        }
 
-    // TO DO: wrap-reverse arm2
-    for (let i = 5; i < 16; i++) {
-        arm2.appendChild(path[i]);
-    }
+        // arm2 is weird
+        else if (i < 10) {
+            arm2.prepend(path[i]);
+        }
+        else if (i < 16) {
+            arm2.appendChild(path[i])
+        }
 
-    // AYYY ARM3 WORKS
-    for (let i = 16; i < 27; i++) {
-        arm3.appendChild(path[i]);
-    }
+        // arm 3
+        else if (i < 23) {
+            // first half
+            arm3.append(path[i]);
 
-    // TO DO: wrap-reverse arm4
-    for (let i = 27; i < 38; i++) {
-        arm4.appendChild(path[i]);
-    }
+            // second half
+        } else if (i < 27) {
+            arm3.insertBefore(path[i], path[i - 1]);
+        } 
 
-    // TO DO: wrap-reverse second half arm1
-    for (let i = 38; i < pathLength; i++) {
-        arm1.appendChild(path[i]);
+        // arm4 is also weird
+        else if (i < 32) {
+            arm4.append(path[i]);
+        }
+        else if (i < 38) {
+            arm4.prepend(path[i]);
+        }
+
+        // second half of arm1
+        else if (i < 39) {
+            arm1.appendChild(path[i]);
+        }
+
+        else {
+            arm1.insertBefore(path[i], path[i - 1]);
+        }
+
     }
 }
