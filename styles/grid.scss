@@ -1,12 +1,3 @@
-// Functions
-// @function gridTrack($size, $amt){
-//     $track: ();
-
-//     @for $_ from 1 through $amt {
-//         $track
-//     }
-// }
-
 // Global Variables
 $square: 40px;
 $cell: $square + 2; //accounting for border
@@ -37,124 +28,122 @@ html, body, .grid-container { height: 100%; margin: 0; }
     aspect-ratio: 1/1;
     height: 100vh;
   }
-  .base-red { grid-area: base-red; }
+.base-red { grid-area: base-red; }
 
-  .base-yellow { grid-area: base-yellow; }
+.base-yellow { grid-area: base-yellow; }
+
+.base-blue { grid-area: base-blue; }
+
+.base-green { grid-area: base-green; }
   
-  .base-blue { grid-area: base-blue; }
-  
-  .base-green { grid-area: base-green; }
-  
-//   horizontal arrms
-  .arm-1 {
-    display: grid;
-    grid-template: repeat(3, $cell) / repeat(5, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . . . ."
-      ". home-red home-red home-red home-red"
-      ". . . . .";
-    grid-area: arm-1;
-  }
+// horizontal arms
+.arm-1 {
+  display: grid;
+  grid-template: repeat(3, $cell) / repeat(5, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . ."
+    ". home-red home-red home-red home-red"
+    ". . . . .";
+  grid-area: arm-1;
+}
 
-  .arm-3 {
-    display: grid;
-    grid-template: repeat(3, $cell) / repeat(5, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . . . ."
-      "home-green home-green home-green home-green ."
-      ". . . . .";
-    grid-area: arm-3;
-  }
-  
-  .arm-2 {
-    display: grid;
-    grid-template: repeat(5, $cell) / repeat(3, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . ."
-      ". home-yellow ."
-      ". home-yellow ."
-      ". home-yellow ."
-      ". home-yellow .";
-    grid-auto-flow: column;
-    grid-area: arm-2;
-  }
-  
-    // vertical arms
-  .arm-4 {
-    display: grid;
-    grid-template: repeat(5, $cell) / repeat(3, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". home-blue ."
-      ". home-blue ."
-      ". home-blue ."
-      ". home-blue ."
-      ". . .";
-    grid-auto-flow: column;
-    grid-area: arm-4;
-  }
+.arm-3 {
+  display: grid;
+  grid-template: repeat(3, $cell) / repeat(5, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . ."
+    "home-green home-green home-green home-green ."
+    ". . . . .";
+  grid-area: arm-3;
+}
 
-//   horizontal lanes
-  .home-red {
-    display: grid;
-    grid-template: $cell / repeat(4, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . . .";
-    grid-auto-flow: row;
-    grid-area: home-red;
-  }
+.arm-2 {
+  display: grid;
+  grid-template: repeat(5, $cell) / repeat(3, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". home-yellow ."
+    ". home-yellow ."
+    ". home-yellow ."
+    ". home-yellow .";
+  grid-auto-flow: column;
+  grid-area: arm-2;
+}
 
-  .home-green {
-    display: grid;
-    grid-template: $cell / repeat(4, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . . .";
-    grid-auto-flow: row;
-    grid-area: home-green;
-  }
+// vertical arms
+.arm-4 {
+  display: grid;
+  grid-template: repeat(5, $cell) / repeat(3, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". home-blue ."
+    ". home-blue ."
+    ". home-blue ."
+    ". home-blue ."
+    ". . .";
+  grid-auto-flow: column;
+  grid-area: arm-4;
+}
 
-//   vertical lanes
+// horizontal lanes
+.home-red {
+  display: grid;
+  grid-template: $cell / repeat(4, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . .";
+  grid-auto-flow: row;
+  grid-area: home-red;
+}
 
-  .home-yellow {
-    display: grid;
-    grid-template: repeat(4, $cell) / $cell;
-    gap: 0px 0px;
-    grid-template-areas:
-      "."
-      "."
-      "."
-      ".";
-    grid-auto-flow: column;
-    grid-area: home-yellow;
-  }
+.home-green {
+  display: grid;
+  grid-template: $cell / repeat(4, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . .";
+  grid-auto-flow: row;
+  grid-area: home-green;
+}
 
- 
-  .home-blue {
-    display: grid;
-    grid-template: repeat(4, $cell) / $cell;
-    gap: 0px 0px;
-    grid-template-areas:
-      "."
-      "."
-      "."
-      ".";
-    grid-auto-flow: column;
-    grid-area: home-blue;
-  }
-  
-  .win {
-    display: grid;
-    grid-template: $cell / $cell;
-    gap: 0px 0px;
-    grid-template-areas:
-      ".";
-    grid-area: win;
-  }
+// vertical lanes
+.home-yellow {
+  display: grid;
+  grid-template: repeat(4, $cell) / $cell;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+  grid-auto-flow: column;
+  grid-area: home-yellow;
+}
+
+.home-blue {
+  display: grid;
+  grid-template: repeat(4, $cell) / $cell;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+  grid-auto-flow: column;
+  grid-area: home-blue;
+}
+
+.win {
+  display: grid;
+  grid-template: $cell / $cell;
+  gap: 0px 0px;
+  grid-template-areas:
+    ".";
+  grid-area: win;
+}
 
 .space {
     display: block;

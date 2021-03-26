@@ -15,7 +15,7 @@ const arm1 = document.querySelector('.arm-1');
 const arm2 = document.querySelector('.arm-2');
 const arm3 = document.querySelector('.arm-3');
 const arm4 = document.querySelector('.arm-4');
-const path = new Array(); // holds spaces
+const path = new Array(); // holds space elements
 layoutPath();
 
 function addSpaces(numSpaces, container, className) {
