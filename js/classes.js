@@ -7,8 +7,6 @@ class Player {
 
         this.pieces = [];
         this.createPieces(); // four pieces
-
-        // TO DO: define home stretch (array?)
     }
 
     createPieces() {
@@ -20,6 +18,7 @@ class Player {
 
 class Piece {
     spaceNum = -1; // in base area
+    pathLeft = 44; // how far to home stretch
 
     constructor() {
 

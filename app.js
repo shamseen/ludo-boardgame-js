@@ -102,6 +102,8 @@ function movePiece(piece, move) {
     if (oldSpace > -1) {
         path[oldSpace].style.backgroundImage = 'none';
         alert(`${game.currentPl.color} moved ${move} spaces`);
+
+        piece.pathLeft -= move; // closer to home stretch
     }
 }
 
