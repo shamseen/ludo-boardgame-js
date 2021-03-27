@@ -1,96 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ludo!</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/grid.css">
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/grid.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="grid-container">
-    
-        <!-- Allowing player to choose pieces -->
-        <!-- TO DO: on click, set active; on hover, highlight piece -->
-        <div id="choosePieces">
-            <!-- Modal -->
-            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <!-- Allowing player to choose pieces -->
+      <!-- TO DO: on click, set active; on hover, highlight piece -->
+      <div id="choosePieces">
+        <!-- Modal src: https://codepen.io/lassediercks/pen/rPxbYM?editors=1000 -->
+        <div class="modal">
+          <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body">
+              <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              ></div>
             </div>
-
-            <div class="card" id="rollA">
-                        <div class="card-header">
-                    Which piece should move A spaces?
-                </div>
-                <ul class="list-group list-group-horizontal">
-                    <a class="list-group-item list-group-item-action">Action item</a>
-                    <a class="list-group-item list-group-item-action">Action item</a>
-                    <a class="list-group-item list-group-item-action">Action item</a>
-                </ul>
-            </div>
-    
-            <div class="card" id="rollB">
-                <div class="card-header">
-                    Which piece should move B spaces?
-                </div>
-                <ul class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action">Action item</a>
-                    <a class="list-group-item list-group-item-action">Action item</a>
-                    <a class="list-group-item list-group-item-action">Action item</a>
-                </ul>
-            </div>
+          </div>
         </div>
-            
-            <!-- No animations = notify via UI alert -->
-            <div class="alert" role="alert">
-            </div>
-            
-            <!-- The good stuff -->
-        <div class="board">
-            <div class="base-red"></div>
-            <div class="base-yellow"></div>
-            <div class="base-blue"></div>
-            <div class="base-green"></div>
-            <!-- player path -->
-            <div class="arm-1">
-                <div class="home-red"></div>
-            </div>
-            <div class="arm-2">
-                <div class="home-yellow"></div>
-            </div>
-            <div class="arm-3">
-                <div class="home-green"></div>
-            </div>
-            <div class="arm-4">
-                <div class="home-blue"></div>
-            </div>
-            <div class="win">
-                <button class="btn btn-secondary" id="roll">red player roll</button>
+
+        <div class="card" id="rollA">
+          <div class="card-header">Which piece should move A spaces?</div>
+          <ul class="list-group list-group-horizontal">
+            <a class="list-group-item list-group-item-action">Action item</a>
+            <a class="list-group-item list-group-item-action">Action item</a>
+            <a class="list-group-item list-group-item-action">Action item</a>
+          </ul>
+        </div>
+
+        <div class="card" id="rollB">
+          <div class="card-header">Which piece should move B spaces?</div>
+          <ul class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action">Action item</a>
+            <a class="list-group-item list-group-item-action">Action item</a>
+            <a class="list-group-item list-group-item-action">Action item</a>
+          </ul>
+        </div>
+      </div>
+
+      <!-- No animations = notify via UI alert -->
+      <div class="alert" role="alert"></div>
+
+      <!-- The good stuff -->
+      <div class="board">
+        <div class="base-red"></div>
+        <div class="base-yellow"></div>
+        <div class="base-blue"></div>
+        <div class="base-green"></div>
+
+        <!-- player path -->
+        <div class="arm-1">
+          <div class="home-red"></div>
+        </div>
+        <div class="arm-2">
+          <div class="home-yellow"></div>
+        </div>
+        <div class="arm-3">
+          <div class="home-green"></div>
+        </div>
+        <div class="arm-4">
+          <div class="home-blue"></div>
+        </div>
+        <div class="win">
+            <div class="email" onclick="this.classList.add('expand')">
+                <div class="from">
+                  <div class="from-contents">
+                    <div class="avatar me"></div>
+                    <div class="name">red player roll</div>
+                  </div>
                 </div>
+                <div class="to">
+                  <div class="to-contents">
+                    <div class="top">
+                      <div class="avatar-large me"></div>
+                      <div class="name-large">Mikael Ainalem</div>
+                      <div class="x-touch" onclick="document.querySelector('.email').classList.remove('expand');event.stopPropagation();">
+                        <div class="x">
+                          <div class="line1"></div>
+                          <div class="line2"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bottom">
+                      <div class="row">
+                        <div class="link"><a href="https://twitter.com/mikaelainalem">@mikaelainalem</a></div>
+                      </div>
+                      <div class="row">
+                        <div class="link"><a href="https://medium.com/@mikael_ainalem">@mikael_ainalem</a></div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
+          <div id="no">
+            <div class="modal-header">Choose</div>
+            <div class="modal-body">
+              <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              >
+              </div>
+            </div>
+          </div>
+          <!-- <div class="btn btn-secondary" id="roll">red player roll</div> -->
+        </div>
+      </div>
+    </div>
     <!-- scripts -->
     <script src="js/classes.js"></script>
     <script src="js/grid-main.js"></script>
     <script src="js/grid-board.js"></script>
     <script src="app.js"></script>
-</body>
-
+  </body>
 </html>

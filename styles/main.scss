@@ -9,20 +9,49 @@
 @import "../node_modules/bootstrap/scss/buttons";
 @import "../node_modules/bootstrap/scss/button-group";
 @import "../node_modules/bootstrap/scss/alert";
-@import "../node_modules/bootstrap/scss/modal";
 // @import "../node_modules/bootstrap/scss/bootstrap";
 
+/* --- Importing fonts and stuff --- */
+@import "https://fonts.googleapis.com/css?family=Prompt:400,700";
+
+#no {
+  display: none;
+}
+body {
+  font-family: "Prompt", sans-serif;
+  font-size: 15px;
+}
 .card {
-    visibility: hidden;
+  visibility: hidden;
 }
 
-.modal {
-    input {
-        display: none;
-    }
+#roll.modal {
+  input {
+    display: none;
+  }
 
-    .btn-group {
-        margin:4px;
-        justify-self: center;
-    }
+  .btn-group {
+    margin: 4px;
+    justify-self: center;
+  }
+}
+#roll.modal {
+  /* This way it could be display flex or grid or whatever also. */
+  display: block;
+  visibility: hidden;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  position: relative;
+  z-index: 100;
+
+  left: 50%;
+  top: 50%;
+
+  /* Use this for centering if unknown width/height */
+  transform: translate(-50%, -50%);
+
+  // src: https://codepen.io/lassediercks/pen/rPxbYM?editors=0100
+  // animation: appear 350ms ease-in 1;
 }

@@ -5,6 +5,7 @@
 const board = document.querySelector('#board');
 const rollBtn = document.querySelector('#roll');
 const alrt = document.querySelector('.alert');
+const modal2 = document.querySelector('#modal');
 // const btnGroup = chooseCard.lastElementChild;
 
 
@@ -44,11 +45,17 @@ const roll = {
 // storing whose turn and changing turns
 const game = {
     currentPl: players.p1,
+    // currentPiece: null,
     currentPiece: players.p1.pieces[0],
     gameOver: false,
     changeTurn() {
+        // update object
         this.currentPl = this.currentPl === players.p1 ? players.p2 : players.p1;
-        rollBtn.innerText = `${this.currentPl.color} player roll`;
+        // this.currentPiece = null;
+        this.currentPiece = players.p1.pieces[0];
+
+        // update UI
+        rollBtn.firstChild = `${this.currentPl.color} player roll`;
     },
     setPiece(id) {
         this.currentPiece = this.currentPl.pieces[id];
@@ -65,19 +72,15 @@ game.gameOver = false;
 // Game logic
 function letsPlay() {
     rollDice();
+    choosePieces();
 
     // check if rules of six applies
     if (roll.hasSix()) {
         rolledSix();
     }
 
-    // not working
-    if (game.currentPl.onBoard > 1) {
-        choosePieces();
-    }
-
     // move piece forward
-    if (game.currentPl.onBoard > 0) {
+    if (game.currentPl.status('play')) {
         movePiece(game.currentPiece, roll.sum);
     }
 
@@ -94,15 +97,23 @@ function letsPlay() {
 
 
 /* ---- Functions ---- */
-function choosePieces() {
+async function choosePieces(addPiece = false) {
 
-    // change modal header
-    modal.querySelector('.modal-header').textContent =
+    /* IF 0 or 1 piece on board & not adding a new, no choice */
+    if (!addPiece && game.currentPl.status('play') < 2) {
+        return;
+    }
+
+    /* ELSE update modal */
+    const msg = addPiece ?
+        `Which piece should enter play?` :
         `Which piece should move ${roll.sum} spaces?`;
 
+    // change modal header
+    modal.querySelector('.modal-header').textContent = msg;
+
     // show modal
-    modal.classList.add('show');
-    modal.style.display = 'block';
+    modal.style.visibility = 'visible';
 }
 
 function enterHomeStretch(piece) {
@@ -132,6 +143,7 @@ function movePiece(piece, move) {
     // update UI
     path[newSpace].style.backgroundImage = `url(${game.currentPl.img})`
 
+
     if (oldSpace > -1) {
         path[oldSpace].style.backgroundImage = 'none';
         notify('moved', move);
@@ -141,10 +153,13 @@ function movePiece(piece, move) {
     }
 }
 
-function moveToStart(piece) {
+function moveToStart() {
+    // player chooses which piece
+    choosePieces(true);
+
     // update objects
-    movePiece(piece, game.currentPl.startSp + 1);
-    game.currentPl.onBoard += 1;
+    movePiece(game.currentPiece, game.currentPl.startSp + 1);
+    game.currentPiece.inBase = false;
 
     // tell players
     notify('added');
@@ -202,20 +217,21 @@ function rollDice() {
 }
 
 function rolledSix() {
-    /* - IF: player has any pieces at base */
-    // TO DO: pick which piece, if any
-
-    /* - IF: first turn - */
-    // set piece on start
-    if (game.currentPl.onBoard === 0) {
-        moveToStart(game.currentPl.pieces[0]);
-
+    /* IF: no pieces at play, set on start */
+    if (game.currentPl.status('play') === 0) {
+        moveToStart();
         roll.sum -= 6; //move piece remainder of roll
     }
 }
 
+function updateModal() {
+
+}
+
 /* ---- Event Handlers ---- */
-rollBtn.addEventListener('click', () => {
+rollBtn.addEventListener('click', (event) => {
+    modal2.classList.add('expand');
+    console.log(modal2);
     notify('reset');
     letsPlay();
 })
