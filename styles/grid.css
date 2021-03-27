@@ -216,35 +216,43 @@ body,
 }
 
 /* --- Modal Animation src: https://codepen.io/ainalem/pen/RqYZNO --- */
-.email {
-  background: #DEDBDF;
+.roll-dice {
+  background: #dedbdf;
   border-radius: 16px;
   height: 32px;
   overflow: hidden;
   position: relative;
-  width: 162px;
-  -webkit-tap-highlight-color: transparent;
   -webkit-transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1), height 300ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1), height 300ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1), height 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 300ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1), height 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1), border-radius 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.email:not(.expand) {
+.roll-dice input {
+  display: none;
+}
+
+.roll-dice .btn-group {
+  margin: 4px;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.roll-dice :not(.expand) {
   cursor: pointer;
 }
 
-.email:not(.expand):hover {
-  background: #C2C0C2;
+.roll-dice :not(.expand):hover {
+  background: #c2c0c2;
 }
 
-.from {
+.roll-dice #collapsed {
   position: absolute;
   -webkit-transition: opacity 200ms 100ms cubic-bezier(0, 0, 0.2, 1);
   transition: opacity 200ms 100ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.from-contents {
+.roll-dice #rollTxt {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -258,16 +266,19 @@ body,
   transition: -webkit-transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+  line-height: 32px;
+  margin-left: 10px;
 }
 
-.to {
+.roll-dice #expanded {
   opacity: 0;
   position: absolute;
   -webkit-transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1);
   transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1);
 }
 
-.to-contents {
+.roll-dice #header {
   -webkit-transform: scale(0.55);
           transform: scale(0.55);
   -webkit-transform-origin: 0 0;
@@ -278,23 +289,8 @@ body,
   transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), -webkit-transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.avatar {
-  border-radius: 12px;
-  height: 24px;
-  left: 6px;
-  position: relative;
-  top: 4px;
-  width: 24px;
-}
-
-.name {
-  font-size: 14px;
-  line-height: 32px;
-  margin-left: 10px;
-}
-
-.top {
-  background: #6422EB;
+.roll-dice .headerTxt {
+  background: #6422eb;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -306,44 +302,16 @@ body,
   -webkit-transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
   transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
   width: 300px;
-}
-
-.avatar-large {
-  border-radius: 21px;
-  height: 42px;
-  margin-left: 12px;
-  position: relative;
-  top: 14px;
-  width: 42px;
-}
-
-.name-large {
   color: #efd8ef;
   font-size: 16px;
   line-height: 70px;
-  margin-left: 20px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.line1 {
-  background: #6422EB;
-  height: 12px;
-  position: absolute;
-  -webkit-transform: translateX(9px) translateY(4px) rotate(45deg);
-          transform: translateX(9px) translateY(4px) rotate(45deg);
-  width: 2px;
-}
-
-.line2 {
-  background: #6422EB;
-  height: 12px;
-  position: absolute;
-  -webkit-transform: translateX(9px) translateY(4px) rotate(-45deg);
-          transform: translateX(9px) translateY(4px) rotate(-45deg);
-  width: 2px;
-}
-
-.bottom {
-  background: #FFF;
+.roll-dice #content {
+  background: #fff;
   color: #444247;
   font-size: 14px;
   height: 200px;
@@ -351,49 +319,7 @@ body,
   width: 300px;
 }
 
-.row {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  height: 60px;
-}
-
-.twitter {
-  margin-left: 16px;
-  height: 30px;
-  position: relative;
-  top: 0px;
-  width: 30px;
-}
-
-.medium {
-  height: 30px;
-  margin-left: 16px;
-  position: relative;
-  width: 30px;
-}
-
-.link {
-  margin-left: 16px;
-}
-
-.link a {
-  color: #444247;
-  text-decoration: none;
-}
-
-.link a:hover {
-  color: #777579;
-}
-
-.email.expand {
+.expand.roll-dice {
   border-radius: 6px;
   -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.16);
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.16);
@@ -401,24 +327,24 @@ body,
   width: 300px;
 }
 
-.expand .from {
+.expand #collapsed {
   opacity: 0;
   -webkit-transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1);
   transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1);
 }
 
-.expand .from-contents {
+.expand #rollTxt {
   -webkit-transform: scale(1.91);
           transform: scale(1.91);
 }
 
-.expand .to {
+.expand #expanded {
   opacity: 1;
   -webkit-transition: opacity 200ms 100ms cubic-bezier(0, 0, 0.2, 1);
   transition: opacity 200ms 100ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.expand .to-contents {
+.expand #header {
   -webkit-transform: scale(1);
           transform: scale(1);
 }

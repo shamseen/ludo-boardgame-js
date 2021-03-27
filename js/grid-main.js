@@ -1,6 +1,6 @@
 /* --- DOM elements --- */
-const modal = document.querySelector('.modal');
-const btnGroup = modal.querySelector('.btn-group');
+const rollDice = document.querySelector('.roll-dice');
+const btnGroup = rollDice.querySelector('.btn-group');
 
 setupChoices();
 
@@ -8,7 +8,9 @@ setupChoices();
 function setupChoices() {
     // html from bootstrap docs https://getbootstrap.com/docs/5.0/components/button-group/#checkbox-and-radio-button-groups
 
-    modal.querySelector(".modal-header").innerHTML = "<h4>Choice</h4>";
+    rollDice.querySelector("#rollTxt").innerText = "red player roll";
+
+    rollDice.querySelector(".headerTxt").innerText = "Choose piece";
 
     for (let i = 0; i < 4; i++) {
 
@@ -23,8 +25,6 @@ function setupChoices() {
 }
 
 function closeModal() {
-    // modal.classList.remove('show');
-    // modal.style.display = 'none';
-    modal.classList.toggle("closed");
-    modalOverlay.classList.toggle("closed");
+    // rollDice.classList.toggle("closed");
+    // modalOverlay.classList.toggle("closed");
 }

@@ -14,21 +14,6 @@
       <!-- Allowing player to choose pieces -->
       <!-- TO DO: on click, set active; on hover, highlight piece -->
       <div id="choosePieces">
-        <!-- Modal src: https://codepen.io/lassediercks/pen/rPxbYM?editors=1000 -->
-        <div class="modal">
-          <div class="modal-content">
-            <div class="modal-header"></div>
-            <div class="modal-body">
-              <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
-              <div
-                class="btn-group"
-                role="group"
-                aria-label="Basic radio toggle button group"
-              ></div>
-            </div>
-          </div>
-        </div>
-
         <div class="card" id="rollA">
           <div class="card-header">Which piece should move A spaces?</div>
           <ul class="list-group list-group-horizontal">
@@ -72,49 +57,24 @@
           <div class="home-blue"></div>
         </div>
         <div class="win">
-            <div class="email" onclick="this.classList.add('expand')">
-                <div class="from">
-                  <div class="from-contents">
-                    <div class="avatar me"></div>
-                    <div class="name">red player roll</div>
-                  </div>
-                </div>
-                <div class="to">
-                  <div class="to-contents">
-                    <div class="top">
-                      <div class="avatar-large me"></div>
-                      <div class="name-large">Mikael Ainalem</div>
-                      <div class="x-touch" onclick="document.querySelector('.email').classList.remove('expand');event.stopPropagation();">
-                        <div class="x">
-                          <div class="line1"></div>
-                          <div class="line2"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="bottom">
-                      <div class="row">
-                        <div class="link"><a href="https://twitter.com/mikaelainalem">@mikaelainalem</a></div>
-                      </div>
-                      <div class="row">
-                        <div class="link"><a href="https://medium.com/@mikael_ainalem">@mikael_ainalem</a></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          <div class="roll-dice" onclick="this.classList.add('expand')">
+            <div id="collapsed">
+              <div id="rollTxt"></div>
+            </div>
+            <div id="expanded">
+              <div class="header">
+                <div class="headerTxt">Choose</div>
               </div>
-          <div id="no">
-            <div class="modal-header">Choose</div>
-            <div class="modal-body">
-              <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
-              <div
-                class="btn-group"
-                role="group"
-                aria-label="Basic radio toggle button group"
-              >
+              <div id="content">
+                <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
+                <div
+                  class="btn-group"
+                  role="group"
+                  aria-label="Basic radio toggle button group"
+                ></div>
               </div>
             </div>
           </div>
-          <!-- <div class="btn btn-secondary" id="roll">red player roll</div> -->
         </div>
       </div>
     </div>
