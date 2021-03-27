@@ -17,14 +17,32 @@
         <!-- Allowing player to choose pieces -->
         <!-- TO DO: on click, set active; on hover, highlight piece -->
         <div id="choosePieces">
+            <!-- Modal -->
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card" id="rollA">
-                <div class="card-header">
+                        <div class="card-header">
                     Which piece should move A spaces?
                 </div>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-horizontal">
                     <a class="list-group-item list-group-item-action">Action item</a>
-                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
-                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
+                    <a class="list-group-item list-group-item-action">Action item</a>
+                    <a class="list-group-item list-group-item-action">Action item</a>
                 </ul>
             </div>
     
@@ -33,9 +51,9 @@
                     Which piece should move B spaces?
                 </div>
                 <ul class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
-                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
-                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
+                    <a class="list-group-item list-group-item-action">Action item</a>
+                    <a class="list-group-item list-group-item-action">Action item</a>
+                    <a class="list-group-item list-group-item-action">Action item</a>
                 </ul>
             </div>
         </div>
@@ -65,11 +83,12 @@
             </div>
             <div class="win">
                 <button class="btn btn-secondary" id="roll">red player roll</button>
-            </div>
-        </div>
-    </div>
+                </div>
+                </div>
+                </div>
     <!-- scripts -->
     <script src="js/classes.js"></script>
+    <script src="js/grid-main.js"></script>
     <script src="js/grid-board.js"></script>
     <script src="app.js"></script>
 </body>

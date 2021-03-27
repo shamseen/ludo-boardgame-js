@@ -1,8 +1,12 @@
 /* ---- DOM Elements ---- */
+/* from grid-main.js:
+// const modal = document.querySelector('#exampleModal');
+*/
 const board = document.querySelector('#board');
 const rollBtn = document.querySelector('#roll');
-const dice = document.querySelector('.dice');
 const alrt = document.querySelector('.alert');
+// const btnGroup = chooseCard.lastElementChild;
+
 
 /* ---- Global Variables ---- */
 // From grid-board.js:
@@ -40,11 +44,15 @@ const roll = {
 // storing whose turn and changing turns
 const game = {
     currentPl: players.p1,
+    currentPiece: players.p1.pieces[0],
+    gameOver: false,
     changeTurn() {
         this.currentPl = this.currentPl === players.p1 ? players.p2 : players.p1;
         rollBtn.innerText = `${this.currentPl.color} player roll`;
     },
-    gameOver: false
+    setPiece(id) {
+        this.currentPiece = this.currentPl.pieces[id];
+    }
 }
 
 /* ---- Executing code ---- */
@@ -56,8 +64,6 @@ game.gameOver = false;
 
 // Game logic
 function letsPlay() {
-
-    const piece = game.currentPl.pieces[0]; // TO DO: let player choose
     rollDice();
 
     // check if rules of six applies
@@ -65,14 +71,19 @@ function letsPlay() {
         rolledSix();
     }
 
+    // not working
+    if (game.currentPl.onBoard > 1) {
+        choosePieces();
+    }
+
     // move piece forward
     if (game.currentPl.onBoard > 0) {
-        movePiece(piece, roll.sum);
+        movePiece(game.currentPiece, roll.sum);
     }
 
     // check if piece has entered home stretch
-    if (piece.pathLeft < 0) {
-        enterHomeStretch(piece);
+    if (game.currentPiece.pathLeft < 0) {
+        enterHomeStretch(game.currentPiece);
     }
 
     // TO DO: allow player to split roll
@@ -83,6 +94,17 @@ function letsPlay() {
 
 
 /* ---- Functions ---- */
+function choosePieces() {
+
+    // change modal header
+    modal.querySelector('.modal-header').textContent =
+        `Which piece should move ${roll.sum} spaces?`;
+
+    // show modal
+    modal.classList.add('show');
+    modal.style.display = 'block';
+}
+
 function enterHomeStretch(piece) {
     notify('home');
     // TO DO: define home stretch
@@ -100,8 +122,6 @@ function movePiece(piece, move) {
 
     const oldSpace = piece.spaceNum;
     let newSpace = oldSpace + move;
-    console.log(move);
-
 
     // colors moving past red's home stretch (into space1)
     newSpace = newSpace >= pathLength ? newSpace - pathLength : newSpace;
@@ -198,4 +218,12 @@ function rolledSix() {
 rollBtn.addEventListener('click', () => {
     notify('reset');
     letsPlay();
+})
+
+btnGroup.addEventListener('click', (event) => {
+    const id = parseInt(event.target.id);
+    game.setPiece(id);
+
+    closeModal();
+    console.log(game.currentPiece);
 })

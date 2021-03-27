@@ -1,1 +1,28 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
+/* --- Import dependencies --- */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/transitions";
+
+/* --- Importing bootstrap components --- */
+@import "../node_modules/bootstrap/scss/card";
+@import "../node_modules/bootstrap/scss/buttons";
+@import "../node_modules/bootstrap/scss/button-group";
+@import "../node_modules/bootstrap/scss/alert";
+@import "../node_modules/bootstrap/scss/modal";
+// @import "../node_modules/bootstrap/scss/bootstrap";
+
+.card {
+    visibility: hidden;
+}
+
+.modal {
+    input {
+        display: none;
+    }
+
+    .btn-group {
+        margin:4px;
+        justify-self: center;
+    }
+}
