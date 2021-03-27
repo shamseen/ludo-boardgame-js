@@ -65,7 +65,7 @@ function letsPlay() {
         rolledSix();
     }
 
-    // otherwise move piece forward
+    // move piece forward
     if (game.currentPl.onBoard > 0) {
         movePiece(piece, roll.sum);
     }
@@ -100,8 +100,8 @@ function movePiece(piece, move) {
 
     const oldSpace = piece.spaceNum;
     let newSpace = oldSpace + move;
+    console.log(move);
 
-    console.log(`old ${oldSpace}\nnew ${newSpace}\n`);
 
     // colors moving past red's home stretch (into space1)
     newSpace = newSpace >= pathLength ? newSpace - pathLength : newSpace;
@@ -125,15 +125,13 @@ function moveToStart(piece) {
     // update objects
     movePiece(piece, game.currentPl.startSp + 1);
     game.currentPl.onBoard += 1;
-    roll.sum -= 6; // remainder to be used on pieces
 
     // tell players
     notify('added');
-    console.log(`${game.currentPl.color} got a piece on the board!`);
 }
 
 function notify(notifn, spaces = null) {
-    let msg = '';
+    let msg = game.currentPl.color;
     let classColor = '';
 
     // setting alert color based on player
@@ -148,17 +146,22 @@ function notify(notifn, spaces = null) {
     // setting msg based on type of notification
     switch (notifn) {
         case 'moved':
-            msg = `${game.currentPl.color} moved ${spaces} spaces`;
+            msg += ` moved ${spaces} spaces`;
             break;
         case 'added':
-            msg = `${game.currentPl.color} put a piece on the board!`;
+            msg += ` put a piece on the board!`;
             break;
-        case 'reset':
+        case 'roll':
+            msg += ` rolled ${spaces.A} & ${spaces.B}`;
+            break;
+        case 'home':
+            msg += `'s piece entered the home stretch!`;
+            break;
+        case 'reset': // blank out alert
+            msg = '';
             alrt.innerText = '';
             classColor = "light";
             break;
-        case 'home':
-            msg = `${game.currentPl.color}'s piece entered the home stretch!`;
         default: break;
     }
 
@@ -173,11 +176,9 @@ function prettyPrint(obj) {
 function rollDice() {
     roll.A = Math.floor(Math.random() * 6) + 1;
     roll.B = Math.floor(Math.random() * 6) + 1;
-    console.log(`first ${roll.A}\nsecond ${roll.B}\n`);
-
     roll.sum = roll.A + roll.B;
 
-    dice.innerText = JSON.stringify(roll, null, 4);
+    notify('roll', roll);
 }
 
 function rolledSix() {
@@ -188,9 +189,8 @@ function rolledSix() {
     // set piece on start
     if (game.currentPl.onBoard === 0) {
         moveToStart(game.currentPl.pieces[0]);
-    } 
-    else { // not first turn, move by whole roll
-        movePiece(game.currentPl.pieces[0], roll.sum);
+
+        roll.sum -= 6; //move piece remainder of roll
     }
 }
 
