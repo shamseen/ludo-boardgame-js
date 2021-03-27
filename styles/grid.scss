@@ -9,9 +9,7 @@ html, body, .grid-container { height: 100%; margin: 0; }
   grid-template-columns: 0.4fr 2.2fr 0.4fr;
   grid-template-rows: 1.8fr 0.2fr;
   gap: 0px 0px;
-  grid-template-areas:
-    ". board ."
-    ". . .";
+  grid-template-areas: ". board .";
   position: relative;
 }
 

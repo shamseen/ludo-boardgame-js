@@ -2,6 +2,7 @@
 const board = document.querySelector('#board');
 const rollBtn = document.querySelector('#roll');
 const dice = document.querySelector('.dice');
+const alrt = document.querySelector('.alert');
 
 /* ---- Global Variables ---- */
 // From grid-board.js:
@@ -42,7 +43,6 @@ const game = {
     changeTurn() {
         this.currentPl = this.currentPl === players.p1 ? players.p2 : players.p1;
         rollBtn.innerText = `${this.currentPl.color} player roll`;
-        console.log(this.currentPl);
     },
     gameOver: false
 }
@@ -77,15 +77,14 @@ function letsPlay() {
 
     // TO DO: allow player to split roll
 
-
+    // updating UI for next turn
     game.changeTurn();
 }
 
 
 /* ---- Functions ---- */
 function enterHomeStretch(piece) {
-    console.log(`${game.currentPl.color}'s piece entered the home stretch!`);
-    alert(`${game.currentPl.color}'s piece entered the home stretch!`);
+    notify('home');
     // TO DO: define home stretch
     // TO DO: Show piece to home stretch
     // TO DO: enter home area logic
@@ -102,9 +101,6 @@ function movePiece(piece, move) {
     const oldSpace = piece.spaceNum;
     let newSpace = oldSpace + move;
 
-
-    console.log(move);
-
     console.log(`old ${oldSpace}\nnew ${newSpace}\n`);
 
     // colors moving past red's home stretch (into space1)
@@ -118,10 +114,10 @@ function movePiece(piece, move) {
 
     if (oldSpace > -1) {
         path[oldSpace].style.backgroundImage = 'none';
-        alert(`${game.currentPl.color} moved ${move} spaces`);
+        notify('moved', move);
 
         piece.pathLeft -= move; // closer to home stretch
-        console.log(piece.pathLeft);
+        console.log(`${game.currentPl.color}: ${piece.pathLeft} until home`);
     }
 }
 
@@ -131,9 +127,43 @@ function moveToStart(piece) {
     game.currentPl.onBoard += 1;
     roll.sum -= 6; // remainder to be used on pieces
 
-    // tell player
-    confirm(`${game.currentPl.color} got a piece on the board!`);
+    // tell players
+    notify('added');
     console.log(`${game.currentPl.color} got a piece on the board!`);
+}
+
+function notify(notifn, spaces = null) {
+    let msg = '';
+    let classColor = '';
+
+    // setting alert color based on player
+    switch (game.currentPl.color) {
+        case 'red': classColor = 'danger'; break;
+        case 'green': classColor = 'success'; break;
+        case 'blue': classColor = 'primary'; break;
+        case 'yellow': classColor = 'warning'; break;
+        default: break;
+    }
+
+    // setting msg based on type of notification
+    switch (notifn) {
+        case 'moved':
+            msg = `${game.currentPl.color} moved ${spaces} spaces`;
+            break;
+        case 'added':
+            msg = `${game.currentPl.color} put a piece on the board!`;
+            break;
+        case 'reset':
+            alrt.innerText = '';
+            classColor = "light";
+            break;
+        case 'home':
+            msg = `${game.currentPl.color}'s piece entered the home stretch!`;
+        default: break;
+    }
+
+    alrt.innerText += '\n\n' + msg;
+    alrt.classList = [`alert alert-${classColor}`];
 }
 
 function prettyPrint(obj) {
@@ -166,5 +196,6 @@ function rolledSix() {
 
 /* ---- Event Handlers ---- */
 rollBtn.addEventListener('click', () => {
+    notify('reset');
     letsPlay();
 })
