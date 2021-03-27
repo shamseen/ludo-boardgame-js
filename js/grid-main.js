@@ -1,6 +1,6 @@
 /* --- DOM elements --- */
-const rollDice = document.querySelector('.roll-dice');
-const btnGroup = rollDice.querySelector('.btn-group');
+const rollBtn = document.querySelector('.roll-dice');
+const btnGroup = rollBtn.querySelector('.btn-group');
 
 setupChoices();
 
@@ -8,9 +8,9 @@ setupChoices();
 function setupChoices() {
     // html from bootstrap docs https://getbootstrap.com/docs/5.0/components/button-group/#checkbox-and-radio-button-groups
 
-    rollDice.querySelector("#rollTxt").innerText = "red player roll";
+    rollBtn.querySelector("#rollTxt").innerText = "red player roll";
 
-    rollDice.querySelector(".headerTxt").innerText = "Choose piece";
+    rollBtn.querySelector(".headerTxt").innerText = "Choose piece";
 
     for (let i = 0; i < 4; i++) {
 

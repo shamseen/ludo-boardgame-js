@@ -1,12 +1,9 @@
 /* ---- DOM Elements ---- */
 /* from grid-main.js:
-// const modal = document.querySelector('#exampleModal');
+// // rollBtn = document.querySelector('.roll-dice');
 */
 const board = document.querySelector('#board');
-const rollBtn = document.querySelector('#roll');
 const alrt = document.querySelector('.alert');
-const modal2 = document.querySelector('#modal');
-// const btnGroup = chooseCard.lastElementChild;
 
 
 /* ---- Global Variables ---- */
@@ -100,9 +97,9 @@ function letsPlay() {
 async function choosePieces(addPiece = false) {
 
     /* IF 0 or 1 piece on board & not adding a new, no choice */
-    if (!addPiece && game.currentPl.status('play') < 2) {
-        return;
-    }
+    // if (!addPiece && game.currentPl.status('play') < 2) {
+    //     return;
+    // }
 
     /* ELSE update modal */
     const msg = addPiece ?
@@ -110,10 +107,8 @@ async function choosePieces(addPiece = false) {
         `Which piece should move ${roll.sum} spaces?`;
 
     // change modal header
-    modal.querySelector('.modal-header').textContent = msg;
+    rollBtn.querySelector('.headerTxt').textContent = msg;
 
-    // show modal
-    modal.style.visibility = 'visible';
 }
 
 function enterHomeStretch(piece) {
@@ -230,9 +225,13 @@ function updateModal() {
 
 /* ---- Event Handlers ---- */
 rollBtn.addEventListener('click', (event) => {
-    modal2.classList.add('expand');
-    console.log(modal2);
+    // show choice modal
+    rollBtn.classList.add('expand');
+
+    // clear right side alerts
     notify('reset');
+
+    // game logic
     letsPlay();
 })
 
