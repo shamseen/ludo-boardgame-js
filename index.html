@@ -12,10 +12,39 @@
 </head>
 
 <body>
-
-    </link>
     <div class="grid-container">
-        <div class="alert" role="alert"></div>
+    
+        <!-- Allowing player to choose pieces -->
+        <!-- TO DO: on click, set active; on hover, highlight piece -->
+        <div id="choosePieces">
+            <div class="card" id="rollA">
+                <div class="card-header">
+                    Which piece should move A spaces?
+                </div>
+                <ul class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action">Action item</a>
+                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
+                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
+                </ul>
+            </div>
+    
+            <div class="card" id="rollB">
+                <div class="card-header">
+                    Which piece should move B spaces?
+                </div>
+                <ul class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
+                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
+                    <a href="#" class="list-group-item list-group-item-action">Action item</a>
+                </ul>
+            </div>
+        </div>
+            
+            <!-- No animations = notify via UI alert -->
+            <div class="alert" role="alert">
+            </div>
+            
+            <!-- The good stuff -->
         <div class="board">
             <div class="base-red"></div>
             <div class="base-yellow"></div>
@@ -38,7 +67,6 @@
                 <button class="btn btn-secondary" id="roll">red player roll</button>
             </div>
         </div>
-        <div class="dice"></div>
     </div>
     <!-- scripts -->
     <script src="js/classes.js"></script>
