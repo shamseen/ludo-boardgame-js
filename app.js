@@ -42,17 +42,14 @@ const roll = {
 // storing whose turn and changing turns
 const game = {
     currentPl: players.p1,
-    // currentPiece: null,
-    currentPiece: players.p1.pieces[0],
+    currentPiece: null,
+    // currentPiece: players.p1.pieces[0],
     gameOver: false,
-    changeTurn() {
+    newTurn() {
         // update object
         this.currentPl = this.currentPl === players.p1 ? players.p2 : players.p1;
-        // this.currentPiece = null;
-        this.currentPiece = players.p1.pieces[0];
-
-        // update UI
-        rollBtn.firstChild = `${this.currentPl.color} player roll`;
+        this.currentPiece = null;
+        // this.currentPiece = players.p1.pieces[0];
     },
     setPiece(id) {
         this.currentPiece = this.currentPl.pieces[id];
@@ -68,8 +65,6 @@ game.gameOver = false;
 
 // Game logic
 function letsPlay() {
-    rollDice();
-    choosePieces();
 
     // check if rules of six applies
     if (roll.hasSix()) {
@@ -88,18 +83,16 @@ function letsPlay() {
 
     // TO DO: allow player to split roll
 
-    // updating UI for next turn
-    game.changeTurn();
+    restart();
 }
 
-
 /* ---- Functions ---- */
-async function choosePieces(addPiece = false) {
+function choosePieces(choice, addPiece = false) {
 
-    /* IF 0 or 1 piece on board & not adding a new, no choice */
-    // if (!addPiece && game.currentPl.status('play') < 2) {
-    //     return;
-    // }
+    /* IF 1 piece on board & not adding a new, no choice */
+    if (!addPiece && game.currentPl.status('play') === 1) {
+        return;
+    }
 
     /* ELSE update modal */
     const msg = addPiece ?
@@ -108,6 +101,9 @@ async function choosePieces(addPiece = false) {
 
     // change modal header
     rollBtn.querySelector('.headerTxt').textContent = msg;
+
+    // set piece
+    game.setPiece(choice);
 
 }
 
@@ -149,8 +145,8 @@ function movePiece(piece, move) {
 }
 
 function moveToStart() {
-    // player chooses which piece
-    choosePieces(true);
+    // TO DO: player chooses which piece
+    // choosePieces(true);
 
     // update objects
     movePiece(game.currentPiece, game.currentPl.startSp + 1);
@@ -195,6 +191,7 @@ function notify(notifn, spaces = null) {
         default: break;
     }
 
+    console.log(msg);
     alrt.innerText += '\n\n' + msg;
     alrt.classList = [`alert alert-${classColor}`];
 }
@@ -203,15 +200,22 @@ function prettyPrint(obj) {
     console.log(JSON.stringify(obj, null, 4));
 }
 
-function rollDice() {
-    roll.A = Math.floor(Math.random() * 6) + 1;
-    roll.B = Math.floor(Math.random() * 6) + 1;
-    roll.sum = roll.A + roll.B;
+function restart() {
+    /* updating UI */
+    notify('reset');
+    rollBtn.firstChild = `${this.currentPl.color} player roll`;
 
-    notify('roll', roll);
+    /* updating objects */
+    // enabling dice
+    rollBtn.addEventListener('click', rollDice);
+
+    // game state
+    game.newTurn();
 }
 
 function rolledSix() {
+    console.log('start')
+
     /* IF: no pieces at play, set on start */
     if (game.currentPl.status('play') === 0) {
         moveToStart();
@@ -219,26 +223,37 @@ function rolledSix() {
     }
 }
 
-function updateModal() {
-
-}
-
 /* ---- Event Handlers ---- */
-rollBtn.addEventListener('click', (event) => {
-    // show choice modal
+
+// piece was clicked
+btnGroup.querySelectorAll('.btn').forEach((btn => {
+    btn.addEventListener('click', (event) => {
+
+        // prevent user from rolling again
+        rollBtn.removeEventListener('click', rollDice);
+
+        // store choice
+        const id = parseInt(event.target.id);
+        choosePieces(id);
+
+        // close modal
+        rollBtn.classList.remove('expand');
+        event.stopPropagation();
+
+        // game logic
+        letsPlay();
+    })
+}))
+
+// dice was rolled
+rollBtn.addEventListener('click', rollDice);
+
+function rollDice() {
+    roll.A = Math.floor(Math.random() * 6) + 1;
+    roll.B = Math.floor(Math.random() * 6) + 1;
+    roll.sum = roll.A + roll.B;
+
+    // update UI
+    notify('roll', roll);
     rollBtn.classList.add('expand');
-
-    // clear right side alerts
-    notify('reset');
-
-    // game logic
-    letsPlay();
-})
-
-btnGroup.addEventListener('click', (event) => {
-    const id = parseInt(event.target.id);
-    game.setPiece(id);
-
-    closeModal();
-    console.log(game.currentPiece);
-})
+}
