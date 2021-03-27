@@ -63,13 +63,21 @@ const game = {
 
 // test
 mockGame();
-game.gameOver = false;
+game.gameOver = true;
 
 
 // Game logic
+do {
+
+    if (game.gameOver) {
+        // TO DO: win logic
+        break;
+    }
+
+} while (!rollBtn.classList.contains('expand'))
+
+
 function letsPlay() {
-    rollDice();
-    choosePieces();
 
     // check if rules of six applies
     if (roll.hasSix()) {
@@ -92,14 +100,14 @@ function letsPlay() {
     game.changeTurn();
 }
 
-
 /* ---- Functions ---- */
 async function choosePieces(addPiece = false) {
 
     /* IF 0 or 1 piece on board & not adding a new, no choice */
-    // if (!addPiece && game.currentPl.status('play') < 2) {
-    //     return;
-    // }
+    if (!addPiece && game.currentPl.status('play') < 2) {
+        console.log('choice skipped');
+        return;
+    }
 
     /* ELSE update modal */
     const msg = addPiece ?
@@ -108,6 +116,11 @@ async function choosePieces(addPiece = false) {
 
     // change modal header
     rollBtn.querySelector('.headerTxt').textContent = msg;
+
+    // show choice modal
+    rollBtn.classList.add('expand');
+
+
 
 }
 
@@ -224,12 +237,13 @@ function updateModal() {
 }
 
 /* ---- Event Handlers ---- */
-rollBtn.addEventListener('click', (event) => {
-    // show choice modal
-    rollBtn.classList.add('expand');
-
+rollBtn.addEventListener('click', async (event) => {
     // clear right side alerts
     notify('reset');
+
+    // update objects
+    rollDice();
+    await choosePieces();
 
     // game logic
     letsPlay();
