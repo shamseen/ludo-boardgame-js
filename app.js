@@ -44,13 +44,11 @@ const roll = {
 const game = {
     currentPl: players.p1,
     currentPiece: null,
-    // currentPiece: players.p1.pieces[0],
     gameOver: false,
     newTurn() {
         // update object
         this.currentPl = this.currentPl === players.p1 ? players.p2 : players.p1;
         this.currentPiece = null;
-        // this.currentPiece = players.p1.pieces[0];
     },
     setPiece(id) {
         this.currentPiece = this.currentPl.pieces[id];
@@ -88,14 +86,28 @@ function letsPlay() {
 }
 
 /* ---- Functions ---- */
-function choosePieces(choice, addPiece = false) {
+function canPlayerChoose() {
+    // when no sixes & nothing else on board
+    const inPlay = game.currentPl.status('play');
 
-    /* IF 1 piece on board & not adding a new, no choice */
-    if (!addPiece && game.currentPl.status('play') === 1) {
-        return;
+    if (inPlay === 0) { // nothing on board
+        if (roll.hasSix()) {
+            game.setPiece(0); // put first in array on board 
+            letsPlay();
+        } else {
+            restart();
+        }
     }
-
-    /* ELSE update modal */
+    else if (inPlay === 1) {
+        if (!roll.hasSix()) {
+            // TO DO: set piece to only one on board
+        }
+    } // more than one one board
+    else {
+        rollDiv.classList.add('expand'); // show modal
+    }
+}
+function letPlayerChoose(choice, addPiece = false) {
     const msg = addPiece ?
         `Which piece should enter play?` :
         `Which piece should move ${roll.sum} spaces?`;
@@ -105,7 +117,6 @@ function choosePieces(choice, addPiece = false) {
 
     // set piece
     game.setPiece(choice);
-
 }
 
 function enterHomeStretch(piece) {
@@ -192,7 +203,7 @@ function notify(notifn, spaces = null) {
         default: break;
     }
 
-    console.log(msg);
+    console.log(msg)
     alrt.innerText += '\n\n' + msg;
     alrt.classList = [`alert alert-${classColor}`];
 }
@@ -202,16 +213,17 @@ function prettyPrint(obj) {
 }
 
 function restart() {
-    /* updating UI */
-    notify('reset');
-    rollDiv.firstChild = `${this.currentPl.color} player roll`;
-
     /* updating objects */
     // enabling dice
-    rollDiv.addEventListener('click', rollDice);
-
+    rollBtn.addEventListener('click', rollDice);
+    
     // game state
     game.newTurn();
+    console.log('new turn)');
+
+    /* updating UI */
+    notify('reset');
+    rollDiv.querySelector("#rollTxt").innerText = `${game.currentPl.color} player roll`;
 }
 
 function rolledSix() {
@@ -231,7 +243,7 @@ btnGroup.querySelectorAll('.btn').forEach((btn => {
     btn.addEventListener('click', (event) => {
         // store choice
         const id = parseInt(event.target.id);
-        choosePieces(id);
+        letPlayerChoose(id);
 
         // close modal
         rollDiv.classList.remove('expand');
@@ -243,7 +255,7 @@ btnGroup.querySelectorAll('.btn').forEach((btn => {
 }))
 
 // dice was rolled
-rollDiv.addEventListener('click', rollDice);
+rollBtn.addEventListener('click', rollDice);
 
 function rollDice() {
     roll.A = Math.floor(Math.random() * 6) + 1;
@@ -252,7 +264,7 @@ function rollDice() {
 
     // update UI
     notify('roll', roll);
-    rollDiv.classList.add('expand');
+    canPlayerChoose();
 
     // prevent user from rolling again
     rollDiv.removeEventListener('click', rollDice);
