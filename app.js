@@ -65,7 +65,7 @@ game.gameOver = false;
 // Game logic
 function letsPlay() {
 
-    // check if rules of six applies
+    // check if any rules of six applies
     if (roll.hasSix()) {
         rolledSix();
     }
@@ -89,6 +89,17 @@ function letsPlay() {
 function canPlayerChoose() {
     // when no sixes & nothing else on board
     const inPlay = game.currentPl.getFilteredPieces('play').length;
+
+    // IF rolled six
+    // // IF pieces in base: add one to board
+    // // ELSE : move active (player's choice)
+    // // TODO: choice betw adding vs moving active
+
+    // ELSE: 
+    // // IF none on board: do nothing
+    // // ELIF 1 on board: no choice, move that
+    // // ELSE: move active (player's choice)
+
 
     if (inPlay === 0) { // nothing on board
         if (roll.hasSix()) {
