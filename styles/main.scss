@@ -9,13 +9,11 @@
 @import "../node_modules/bootstrap/scss/buttons";
 @import "../node_modules/bootstrap/scss/button-group";
 @import "../node_modules/bootstrap/scss/alert";
-// @import "../node_modules/bootstrap/scss/bootstrap";
 
 /* --- Importing fonts and stuff --- */
-@import "https://fonts.googleapis.com/css?family=Prompt:400,700";
 
 body {
-  font-family: "Prompt", sans-serif;
+  font-family: $font-family-monospace;
   font-size: 15px;
 }
 .card {

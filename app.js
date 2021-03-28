@@ -1,9 +1,10 @@
 /* ---- DOM Elements ---- */
 /* from grid-main.js:
-// // rollBtn = document.querySelector('.roll-dice');
+// // rollDiv = document.querySelector('.roll-dice');
 */
 const board = document.querySelector('#board');
 const alrt = document.querySelector('.alert');
+const rollBtn = rollDiv.querySelector('#collapsed');
 
 
 /* ---- Global Variables ---- */
@@ -100,7 +101,7 @@ function choosePieces(choice, addPiece = false) {
         `Which piece should move ${roll.sum} spaces?`;
 
     // change modal header
-    rollBtn.querySelector('.headerTxt').textContent = msg;
+    rollDiv.querySelector('.headerTxt').textContent = msg;
 
     // set piece
     game.setPiece(choice);
@@ -203,11 +204,11 @@ function prettyPrint(obj) {
 function restart() {
     /* updating UI */
     notify('reset');
-    rollBtn.firstChild = `${this.currentPl.color} player roll`;
+    rollDiv.firstChild = `${this.currentPl.color} player roll`;
 
     /* updating objects */
     // enabling dice
-    rollBtn.addEventListener('click', rollDice);
+    rollDiv.addEventListener('click', rollDice);
 
     // game state
     game.newTurn();
@@ -228,16 +229,12 @@ function rolledSix() {
 // piece was clicked
 btnGroup.querySelectorAll('.btn').forEach((btn => {
     btn.addEventListener('click', (event) => {
-
-        // prevent user from rolling again
-        rollBtn.removeEventListener('click', rollDice);
-
         // store choice
         const id = parseInt(event.target.id);
         choosePieces(id);
 
         // close modal
-        rollBtn.classList.remove('expand');
+        rollDiv.classList.remove('expand');
         event.stopPropagation();
 
         // game logic
@@ -246,7 +243,7 @@ btnGroup.querySelectorAll('.btn').forEach((btn => {
 }))
 
 // dice was rolled
-rollBtn.addEventListener('click', rollDice);
+rollDiv.addEventListener('click', rollDice);
 
 function rollDice() {
     roll.A = Math.floor(Math.random() * 6) + 1;
@@ -255,5 +252,8 @@ function rollDice() {
 
     // update UI
     notify('roll', roll);
-    rollBtn.classList.add('expand');
+    rollDiv.classList.add('expand');
+
+    // prevent user from rolling again
+    rollDiv.removeEventListener('click', rollDice);
 }
