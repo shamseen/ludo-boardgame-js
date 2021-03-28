@@ -65,11 +65,6 @@ game.gameOver = false;
 // Game logic
 function letsPlay() {
 
-    // check if any rules of six applies
-    if (roll.hasSix()) {
-        rolledSix();
-    }
-
     // move piece forward
     if (game.currentPl.getFilteredPieces('play').length !== 0) {
         movePiece(game.currentPiece, roll.sum);
@@ -87,35 +82,30 @@ function letsPlay() {
 
 /* ---- Functions ---- */
 function canPlayerChoose() {
-    // when no sixes & nothing else on board
-    const inPlay = game.currentPl.getFilteredPieces('play').length;
-
-    // IF rolled six
-    // // IF pieces in base: add one to board
-    // // ELSE : move active (player's choice)
-    // // TODO: choice betw adding vs moving active
-
-    // ELSE: 
-    // // IF none on board: do nothing
-    // // ELIF 1 on board: no choice, move that
-    // // ELSE: move active (player's choice)
-
-
-    if (inPlay === 0) { // nothing on board
-        if (roll.hasSix()) {
-            game.setPiece(0); // put first in array on board 
-            letsPlay();
-        } else {
-            restart();
-        }
+    // const inPlay = game.currentPl.getFilteredPieces('play').length;
+    const inPlay = game.currentPl.getFilteredPieces('play');
+    
+    // IF rolled six, check if any rules of six applies
+    if (roll.hasSix()) {
+        rolledSix();
+        return;
     }
-    else if (inPlay === 1) {
-        if (!roll.hasSix()) {
-            // TO DO: set piece to only one on board
-        }
-    } // more than one one board
-    else {
-        rollDiv.classList.add('expand'); // show modal
+
+    // ELSE
+    switch (inPlay.length) {
+        // IF none on board: next turn
+        case 0: restart(); break;
+
+        // ELIF 1 on board: no choice, move that
+        case 1:
+            game.currentPiece = inPlay[0];
+            letsPlay();
+            break;
+
+        // ELSE: move active (player's choice)
+        default:
+            rollDiv.classList.add('expand'); // show modal
+            break;
     }
 }
 function letPlayerChoose(choice, addPiece = false) {
@@ -168,12 +158,12 @@ function movePiece(piece, move) {
 }
 
 function moveToStart() {
-    // TO DO: player chooses which piece
-    // choosePieces(true);
+    // TO DO: pause so player knows
 
     // update objects
-    movePiece(game.currentPiece, game.currentPl.startSp + 1);
+    game.currentPiece = game.currentPl.getRandomPiece('base');
     game.currentPiece.inBase = false;
+    movePiece(game.currentPiece, game.currentPl.startSp + 1);
 
     // tell players
     notify('added');
@@ -238,13 +228,19 @@ function restart() {
 }
 
 function rolledSix() {
-    console.log('start')
+    // TODO: choice betw adding vs moving active
 
-    /* IF: no pieces at play, set on start */
-    if (game.currentPl.getFilteredPieces('play').length === 0) {
+    // IF pieces in base: add random to board
+    if (game.currentPl.getFilteredPieces('base').length > 0) {
         moveToStart();
         roll.sum -= 6; //move piece remainder of roll
     }
+
+    // ELSE : move active (player's choice)
+    else {
+        rollDiv.classList.add('expand'); // show modal
+    }
+
 }
 
 /* ---- Event Handlers ---- */
