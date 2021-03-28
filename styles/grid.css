@@ -22,7 +22,7 @@ body,
   display: grid;
   grid-template: 210px 126px 15 210px 126px;
   gap: 0px 0px;
-      grid-template-areas: "base-red arm-2 base-yellow" "arm-1 win arm-3" "base-blue arm-4 base-green";
+      grid-template-areas: "base-red arm-2 base-yellow" "arm-1 home arm-3" "base-blue arm-4 base-green";
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: board;
@@ -169,7 +169,7 @@ body,
   grid-area: home-blue;
 }
 
-.win {
+.home {
   display: -ms-grid;
   display: grid;
   grid-template: 1;
@@ -177,7 +177,7 @@ body,
       grid-template-areas: ".";
   -ms-grid-row: 2;
   -ms-grid-column: 2;
-  grid-area: win;
+  grid-area: home;
 }
 
 .space {
@@ -250,6 +250,8 @@ body,
       align-self: center;
   max-width: 70%;
   max-height: 70%;
+  background-color: #b30000;
+  z-index: 1;
 }
 
 .roll-dice #rollTxt {
