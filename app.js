@@ -71,7 +71,7 @@ function letsPlay() {
     }
 
     // move piece forward
-    if (game.currentPl.status('play')) {
+    if (game.currentPl.getFilteredPieces('play').length !== 0) {
         movePiece(game.currentPiece, roll.sum);
     }
 
@@ -88,7 +88,7 @@ function letsPlay() {
 /* ---- Functions ---- */
 function canPlayerChoose() {
     // when no sixes & nothing else on board
-    const inPlay = game.currentPl.status('play');
+    const inPlay = game.currentPl.getFilteredPieces('play').length;
 
     if (inPlay === 0) { // nothing on board
         if (roll.hasSix()) {
@@ -230,7 +230,7 @@ function rolledSix() {
     console.log('start')
 
     /* IF: no pieces at play, set on start */
-    if (game.currentPl.status('play') === 0) {
+    if (game.currentPl.getFilteredPieces('play').length === 0) {
         moveToStart();
         roll.sum -= 6; //move piece remainder of roll
     }

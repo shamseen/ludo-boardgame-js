@@ -15,16 +15,26 @@ class Player {
         }
     }
 
-    status(loc) {
+    getFilteredPieces(loc) {
         switch (loc) {
             case 'base':
-                return this.pieces.filter(p => p.inBase).length;
+                return this.pieces.filter(p => p.inBase);
             case 'home':
-                return this.pieces.filter(p => p.inHome).length;
+                return this.pieces.filter(p => p.inHome);
             case 'play':
-                return this.pieces.filter(p => !p.inBase && !p.inHome).length;
+                return this.pieces.filter(p => !p.inBase && !p.inHome);
             default: break;
         }
+    }
+
+    getRandomPiece(loc) {
+        const p = this.getFilteredPieces(loc);
+
+        // if only piece, return it; otherwise random
+        const i = p.length === 1 ? 0 : Math.floor(Math.random() * p.length);
+
+        // if no pieces, return undefined
+        return p.length === 0 ? undefined : p[i];
     }
 }
 
