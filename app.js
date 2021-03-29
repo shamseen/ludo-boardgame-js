@@ -4,9 +4,6 @@
 -- -- btnGroup = rollDiv.querySelector('.btn-group');
 -- -- notifs = document.querySelector('.notifs');
 */
-const board = document.querySelector('#board');
-const rollBtn = rollDiv.querySelector('#collapsed');
-
 
 /* ---- Global Variables ---- */
 // From grid-board.js:
@@ -60,6 +57,7 @@ const game = {
 
 // test
 mockGame();
+updateBtnColor(game.currentPl.getThemeColor());
 game.gameOver = false;
 
 
@@ -160,28 +158,31 @@ function moveToStart() {
 }
 
 function notify(nType, spaces = null) {
-    let pColor = game.currentPl.color;
+    let pColor = game.currentPl.getThemeColor();
     
     notifyPlayers(nType, pColor, spaces);
 
 }
 
-function prettyPrint(obj) {
-    console.log(JSON.stringify(obj, null, 4));
+function onChoiceHover(event) {
+    // get space number of target piece
+    const piece = game.currentPl.pieces[event.target.id];
+
+    // remove highlight
+    highlightRemove(piece.spaceNum);
 }
 
 function restart() {
     /* updating objects */
-    // enabling dice
+    // enabling dice and space highlights
     rollBtn.addEventListener('click', rollDice);
     
     // game state
     game.newTurn();
-    console.log('new turn)');
 
     /* updating UI */
     notify('reset');
-    rollDiv.querySelector("#rollTxt").innerText = `${game.currentPl.color} player roll`;
+    updateBtnColor(game.currentPl.getThemeColor());
 }
 
 function rolledSix() {
@@ -225,24 +226,24 @@ btnGroup.addEventListener('click', event => {
     chooseCard.style.visibility = 'hidden';
     cardContent.style.visibility = 'hidden';
 
+    // remove highlight
+    highlightRemove(game.currentPiece.spaceNum);
+
     // game logic
     letsPlay();
 })
-btnGroup.querySelectorAll('.btn').forEach((btn => {
-    btn.addEventListener('click', (event) => {
-        // store choice
-        const id = parseInt(event.target.id);
-        game.setPiece(id);
 
-        // close modal
-        chooseCard.style.visibility = 'hidden';
-        cardContent.style.visibility = 'hidden';
+// TO DO: highlight spaces on btn hover
+btnGroup.addEventListener('mouseover', event => {
 
-        // game logic
-        letsPlay();
-    })
-}))
+    // get space number of target piece
+    const piece = game.currentPl.pieces[event.target.id];
 
+    // highlight space
+    highlightSpace(piece.spaceNum, game.currentPl.getThemeColor());
+});
+
+btnGroup.addEventListener('mouseout', onChoiceHover)
 
 // dice was rolled
 rollBtn.addEventListener('click', rollDice);

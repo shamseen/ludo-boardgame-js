@@ -221,6 +221,10 @@ html {
   grid-area: home;
 }
 
+* {
+  z-index: 0;
+}
+
 .space {
   display: block;
   height: auto;
@@ -230,6 +234,7 @@ html {
   height: 40px;
   width: 40px;
   opacity: 0.7;
+  /* highlight space on btn hover! */
 }
 
 .space.path {
@@ -257,6 +262,23 @@ html {
   border-color: #f7910c;
 }
 
+.space.highLight {
+  opacity: 0.3;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+
+.space .overlay {
+  top: 0;
+  bottom: 0;
+  height: 42px;
+  width: 42px;
+  opacity: 0.6;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  z-index: 1;
+}
+
 .roll-dice {
   background: #dedbdf;
   position: relative;
@@ -270,12 +292,17 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .roll-dice button {
-  -ms-grid-column-align: center;
-      justify-self: center;
+  width: 85%;
+  height: 70%;
   cursor: pointer;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .roll-dice #rollTxt {
@@ -286,7 +313,7 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 32px;
   margin-left: 10px;
 }

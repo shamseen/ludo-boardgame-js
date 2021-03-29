@@ -1,5 +1,6 @@
 /* --- DOM elements --- */
 const rollDiv = document.querySelector('.roll-dice');
+const rollBtn = rollDiv.querySelector('button');
 const chooseCard = document.querySelector('#chooseCard');
 const cardContent = chooseCard.querySelector('.card-content');
 const btnGroup = chooseCard.querySelector('.btn-group');
@@ -14,7 +15,6 @@ function createAlert(classClr, msg) {
     alrt.innerText = msg;
 
     alerts.append(alrt);
-    console.log(msg);
 
     // remove after fade out
     alrt.addEventListener('animationend', (event) => {
@@ -22,18 +22,8 @@ function createAlert(classClr, msg) {
     });
 }
 
-function notifyPlayers(nType, pColor, spaces) {
-    let classClr = 'light';
+function notifyPlayers(nType, classClr, spaces) {
     let msg = '';
-
-    // setting alert color based on player
-    switch (pColor) {
-        case 'red': classClr = 'danger'; break;
-        case 'green': classClr = 'success'; break;
-        case 'blue': classClr = 'primary'; break;
-        case 'yellow': classClr = 'warning'; break;
-        default: break;
-    }
 
     // setting msg based on type of notification
     switch (nType) {
@@ -52,7 +42,7 @@ function notifyPlayers(nType, pColor, spaces) {
         case 'reset': // blank out alert
             msg = '';
             classClr = "light";
-            break;
+            return;
         default: break;
     }
     createAlert(classClr, msg);
@@ -61,30 +51,27 @@ function notifyPlayers(nType, pColor, spaces) {
 function setupChoices() {
     // html from bootstrap docs https://getbootstrap.com/docs/5.0/components/button-group/#checkbox-and-radio-button-groups
 
-    rollDiv.querySelector("#rollTxt").innerText = "red player roll";
-
-    rollDiv.querySelector(".headerTxt").innerText = "Player choice";
-
     for (let i = 0; i < 4; i++) {
 
         // radio button
         btnGroup.innerHTML +=
-            `<input type="radio" class="btn-check" name="btnradio" id="p${i}-btn" autocomplete="off">`;
+            `<input type="radio" class="btn-check" name="btnradio" id="${i}" autocomplete="off">`;
 
         // label
         btnGroup.innerHTML +=
-            `<label class="btn btn-outline-primary" id="${i}" for="p${i}-btn"> ${i + 1}</label>`;
+            `<label class="btn btn-outline-primary" id="${i}" for="${i}"> ${i + 1}</label>`;
     }
+}
+
+function updateBtnColor(classClr) {
+
+    rollBtn.className = `btn btn-${classClr}`;
+
 }
 
 function updateModal(header, inPlay, pColor) {
     /* -- adding question to header -- */
     chooseCard.querySelector('.card-header').textContent = header;
-
-    // resetting colors
-    chooseCard.classList.remove();
-    cardContent.classList.remove();
-
 
     // setting color
     let classClr = 'light';
@@ -97,8 +84,7 @@ function updateModal(header, inPlay, pColor) {
         default: break;
     }
 
-    chooseCard.classList.add(`border-${classClr}`);
-    cardContent.classList.add(`text-${classClr}`)
+    chooseCard.className = `card bg-${classClr}`;
 
     /* -- showing only available pieces -- */
     // clearing old choices
@@ -109,11 +95,11 @@ function updateModal(header, inPlay, pColor) {
 
         // radio button
         btnGroup.innerHTML +=
-            `<input type="radio" class="btn-check" name="btnradio" id="p${p.id}-btn" autocomplete="off">`;
+            `<input type="radio" class="btn-check" name="btnradio" id="${p.id}" autocomplete="off">`;
 
         // label
         btnGroup.innerHTML +=
-            `<label class="btn btn-outline-primary" id="${p.id}" for="p${p.id}-btn"> 
+            `<label class="btn btn-outline-primary" id="${p.id}" for="${p.id}">
                 Space ${p.spaceNum + 1}
             </label>`;
     });

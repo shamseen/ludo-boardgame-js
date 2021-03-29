@@ -27,6 +27,12 @@ class Player {
         }
     }
 
+    getPieceBySpace(space) {
+        return this.pieces.find(p => {
+            p.spaceNum === space;
+        })
+    }
+
     getRandomPiece(loc) {
         const p = this.getFilteredPieces(loc);
 
@@ -35,6 +41,19 @@ class Player {
 
         // if no pieces, return undefined
         return p.length === 0 ? undefined : p[i];
+    }
+
+    getThemeColor() {
+        let theme = '';
+        switch (this.color) {
+            case 'red': theme = 'danger'; break;
+            case 'green': theme = 'success'; break;
+            case 'blue': theme = 'primary'; break;
+            case 'yellow': theme = 'warning'; break;
+            default: break;
+        }
+
+        return theme;
     }
 }
 

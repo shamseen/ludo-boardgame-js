@@ -26,7 +26,6 @@ function addSpaces(numSpaces, container, className) {
 
         if (Array.isArray(container)) {
             container.push(sp);
-            console.log('array? ' + className)
         } else {
             container.appendChild(sp);
         }
@@ -38,6 +37,31 @@ function fillHomeStretch() {
 
         addSpaces(homeLane, grid.firstElementChild, grid.id);
     });
+}
+
+function highlightRemove(id) {
+    // find space by id
+    const space = path[id];
+
+    // mouseout workaround
+    if (space === undefined || !space.hasChildNodes()) return;
+
+    // continue if not that
+    space.classList.remove('highlight'); // fade in
+    console.log(space);
+    space.firstElementChild.remove();
+}
+
+function highlightSpace(id, classClr) {
+
+    const overlay = document.createElement('div');
+    // player's color + fade-in animation
+    overlay.className = `overlay btn-${classClr}`;
+
+    // find space by id
+    const space = path[id];
+    space.classList.add('highlight'); // fade out
+    space.appendChild(overlay);
 }
 
 function layoutPath() {
