@@ -66,9 +66,7 @@ game.gameOver = false;
 function letsPlay() {
 
     // move piece forward
-    if (game.currentPl.getFilteredPieces('play').length !== 0) {
-        movePiece(game.currentPiece, roll.sum);
-    }
+    movePiece(game.currentPiece, roll.sum);
 
     // check if piece has entered home stretch
     if (game.currentPiece.pathLeft < 0) {
@@ -107,17 +105,6 @@ function canPlayerChoose() {
             rollDiv.classList.add('expand'); // show modal
             break;
     }
-}
-function letPlayerChoose(choice, addPiece = false) {
-    const msg = addPiece ?
-        `Which piece should enter play?` :
-        `Which piece should move ${roll.sum} spaces?`;
-
-    // change modal header
-    rollDiv.querySelector('.headerTxt').textContent = msg;
-
-    // set piece
-    game.setPiece(choice);
 }
 
 function enterHomeStretch(piece) {
@@ -163,10 +150,12 @@ function moveToStart() {
     // update objects
     game.currentPiece = game.currentPl.getRandomPiece('base');
     game.currentPiece.inBase = false;
-    movePiece(game.currentPiece, game.currentPl.startSp + 1);
 
     // tell players
     notify('added');
+
+    // move piece to start
+    movePiece(game.currentPiece, game.currentPl.startSp + 1);
 }
 
 function notify(notifn, spaces = null) {
@@ -234,23 +223,36 @@ function rolledSix() {
     if (game.currentPl.getFilteredPieces('base').length > 0) {
         moveToStart();
         roll.sum -= 6; //move piece remainder of roll
+        letsPlay(); // continue turn
     }
 
     // ELSE : move active (player's choice)
     else {
-        rollDiv.classList.add('expand'); // show modal
+        showModal();
     }
 
 }
 
+function showModal() {
+    // const msg = addPiece ?
+    // `Which piece should enter play?` :
+    // `Which piece should move ${roll.sum} spaces?`;
+    const msg = `Which piece should move ${roll.sum} spaces?`;
+
+    // update modal header
+    rollDiv.querySelector('.headerTxt').textContent = msg;
+
+    // TO DO: show only available pieces
+}
+
 /* ---- Event Handlers ---- */
 
-// piece was clicked
+// player chose a piece
 btnGroup.querySelectorAll('.btn').forEach((btn => {
     btn.addEventListener('click', (event) => {
         // store choice
         const id = parseInt(event.target.id);
-        letPlayerChoose(id);
+        game.setPiece(id);
 
         // close modal
         rollDiv.classList.remove('expand');
