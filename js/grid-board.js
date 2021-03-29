@@ -7,7 +7,7 @@ const pathLength = 44;
 
 /* ---- DOM Elements ---- */
 // defining all home stretch grids; src: https://stackoverflow.com/a/26625391
-const stretches = document.querySelectorAll('[class*="home"]');
+const stretches = document.querySelectorAll('[class*="home-"]');
 fillHomeStretch();
 
 // defining all aspects of path
@@ -25,7 +25,8 @@ function addSpaces(numSpaces, container, className) {
         sp.id = i;
 
         if (Array.isArray(container)) {
-            container.push(sp)
+            container.push(sp);
+            console.log('array? ' + className)
         } else {
             container.appendChild(sp);
         }
@@ -34,7 +35,8 @@ function addSpaces(numSpaces, container, className) {
 
 function fillHomeStretch() {
     stretches.forEach((grid) => {
-        addSpaces(homeLane, grid, grid.className);
+
+        addSpaces(homeLane, grid.firstElementChild, grid.id);
     });
 }
 

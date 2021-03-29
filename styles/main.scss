@@ -10,12 +10,53 @@
 @import "../node_modules/bootstrap/scss/button-group";
 @import "../node_modules/bootstrap/scss/alert";
 
-/* --- Importing fonts and stuff --- */
-
 body {
   font-family: $font-family-monospace;
   font-size: 15px;
 }
 .card {
   visibility: hidden;
+  display: flex;
+  flex-flow: row wrap;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  .btn-group {
+    margin: 4px;
+    justify-self: center;
+  }
+  input {
+    display: none;
+  }
+}
+
+.alerts-container {
+  visibility: visible;
+}
+
+.alerts {
+  visibility: inherit;
+}
+
+/* -- Alert auto dismissal -- */
+
+@keyframes fades {
+  0% {
+    display: "none";
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.alert {
+  animation: fades 4s cubic-bezier(0.15, 0, 0, 0.3);
+  height: fit-content;
+  margin: 1px;
 }

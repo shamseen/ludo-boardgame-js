@@ -1,6 +1,8 @@
 // Global Variables
 $square: 40px;
 $cell: $square + 2; //accounting for border
+$armL: $cell*5;
+$armW: $cell*3;
 
 html,
 body,
@@ -9,18 +11,33 @@ body,
   margin: 0;
 }
 
+html {
+  background-color: #b56ab0;
+background-image: url(http://www.transparenttextures.com/patterns/pool-table.png);
+}
 .grid-container {
   display: grid;
-  grid-template-columns: 0.8fr 1.8fr 0.4fr;
-  grid-template-rows: 1.8fr 0.2fr;
+  grid-template-columns: 1fr 13*$cell  1fr;
+  grid-template-rows: 1fr;
   gap: 0px 0px;
-  grid-template-areas: ". board .";
+  grid-template-areas: ". board notifs";
   position: relative;
+  margin: 2vh;
+  max-height: 100vh;
+
+}
+.notifs {
+  display: grid;
+  gap: 0px 0px;
+  grid-area: notifs;
+  position: relative;
+  height: 100vh;
 }
 
 .board {
   display: grid;
-  grid-template: $cell * 5 $cell * 3 $cell * 5 / $cell * 3 $cell * 5 $cell * 3;
+  grid-template-columns: $armL $armW $armL;
+  grid-template-rows: $armL $armW $armL;
   gap: 0px 0px;
   grid-template-areas:
     "base-red arm-2 base-yellow"
@@ -28,7 +45,6 @@ body,
     "base-blue arm-4 base-green";
   grid-area: board;
   position: relative;
-  aspect-ratio: 1/1;
   height: 100vh;
 }
 .base-red {
@@ -47,6 +63,11 @@ body,
   grid-area: base-green;
 }
 
+[class*='arm']{
+  box-shadow: 
+  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
 // horizontal arms
 .arm-1 {
   display: grid;
@@ -102,20 +123,30 @@ body,
 // horizontal lanes
 .home-red {
   display: grid;
-  grid-template: $cell / repeat(4, $cell);
+  grid-template: $cell / $cell;
   gap: 0px 0px;
-  grid-template-areas: ". . . .";
+  grid-template-areas: ".";
   grid-auto-flow: row;
   grid-area: home-red;
+
+  .homeLn-container {
+    display: flex;
+    flex-flow: row;
+  }
 }
 
 .home-green {
   display: grid;
-  grid-template: $cell / repeat(4, $cell);
+  grid-template: $cell / $cell;
   gap: 0px 0px;
-  grid-template-areas: ". . . .";
+  grid-template-areas: ".";
   grid-auto-flow: row;
   grid-area: home-green;
+
+  .homeLn-container {
+    display: flex;
+    flex-flow: row;
+  }
 }
 
 // vertical lanes
@@ -161,6 +192,7 @@ body,
   border: 1px solid;
   height: min($square);
   width: min($square);
+  opacity: 0.7;
 
   &.path {
     background-color: #e7e5db;
@@ -168,116 +200,40 @@ body,
   }
 
   &[class*="red"] {
-    background-color: rgba(252, 72, 72, 0.774);
+    background-color: rgb(252, 72, 72);
     border-color: rgb(179, 0, 0);
   }
 
   &[class*="green"] {
-    background-color: rgba(252, 72, 72, 0.774);
-    border-color: rgb(179, 0, 0);
+    background-color: rgb(72, 252, 104);
+    border-color: rgb(0, 200, 10);
   }
   &[class*="blue"] {
-    background-color: rgba(252, 72, 72, 0.774);
-    border-color: rgb(179, 0, 0);
+    background-color: rgb(137,108,229);
+    border-color: rgb(76, 59, 104);
   }
   &[class*="yellow"] {
-    background-color: rgba(252, 72, 72, 0.774);
-    border-color: rgb(179, 0, 0);
+    background-color: rgb(255,200,61);
+    border-color: rgb(247, 145, 12);
   }
 }
 
-/* --- Modal Animation src: https://codepen.io/ainalem/pen/RqYZNO --- */
 .roll-dice {
   background: #dedbdf;
-  border-radius: 16px;
   position: relative;
-  width: 10em;
-  height: 10em;
-  transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    height 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-radius 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    input {
-      display: none;
-    }
-  
-    .btn-group {
-      margin: 4px;
-      justify-self: center;
-    }
-
-  :not(.expand) {
+  button {
+    justify-self: center;
     cursor: pointer;
-  }
-
-  #collapsed {
-    transition: opacity 200ms 100ms cubic-bezier(0, 0, 0.2, 1);
-    align-self: center;;
-    // &:hover {background: blue;}
-    max-width: 70%;
-    max-height: 70%;
-    background-color:rgb(179, 0, 0);
-    z-index: 1;
   }
   #rollTxt {
     display: flex;
     flex-direction: row;
-    transform-origin: 0 0;
-    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 14px;
     line-height: 32px;
     margin-left: 10px;
-  }
-  #expanded {
-    opacity: 0;
-    transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1);
-    height: 100%;
-  }
-  #header {
-    transform: scale(0.55);
-    transform-origin: 0 0;
-    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    width: 100%;
-  }
-  .headerTxt {
-    background: #6422eb;
-    transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
-    color: #efd8ef;
-    font-size: 16px;
-  }
-
-  #content {
-    background: #fff;
-    color: #444247;
-    font-size: 14px;
-    padding: 5px;
-    width:100%;
-  }
-}
-
-.expand {
-  &.roll-dice {
-    border-radius: 6px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.16);
-  }
-
-  #collapsed {
-    opacity: 0;
-    transition: opacity 100ms cubic-bezier(0.4, 0, 1, 1);
-    display: none;
-  }
-
-  #rollTxt {
-    transform: scale(1.91);
-  }
-
-  #expanded {
-    opacity: 1;
-    transition: opacity 200ms 100ms cubic-bezier(0, 0, 0.2, 1);
-  }
-
-  #header {
-    transform: scale(1);
   }
 }

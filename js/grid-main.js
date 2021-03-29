@@ -1,10 +1,63 @@
 /* --- DOM elements --- */
 const rollDiv = document.querySelector('.roll-dice');
-const btnGroup = rollDiv.querySelector('.btn-group');
-
-setupChoices();
+const chooseCard = document.querySelector('#chooseCard');
+const cardContent = chooseCard.querySelector('.card-content');
+const btnGroup = chooseCard.querySelector('.btn-group');
+const alerts = document.querySelector('.alerts-container')
 
 /* --- Functions ---- */
+function createAlert(classClr, msg) {
+    const alrt = document.createElement('div');
+
+    alrt.classList = [`alert alert-${classClr} fade show`];
+    alrt.setAttribute('role', 'alert');
+    alrt.innerText = msg;
+
+    alerts.append(alrt);
+    console.log(msg);
+
+    // remove after fade out
+    alrt.addEventListener('animationend', (event) => {
+        alrt.remove();
+    });
+}
+
+function notifyPlayers(nType, pColor, spaces) {
+    let classClr = 'light';
+    let msg = '';
+
+    // setting alert color based on player
+    switch (pColor) {
+        case 'red': classClr = 'danger'; break;
+        case 'green': classClr = 'success'; break;
+        case 'blue': classClr = 'primary'; break;
+        case 'yellow': classClr = 'warning'; break;
+        default: break;
+    }
+
+    // setting msg based on type of notification
+    switch (nType) {
+        case 'moved':
+            msg += ` moved ${spaces} spaces`;
+            break;
+        case 'added':
+            msg += ` put a piece on the board!`;
+            break;
+        case 'roll':
+            msg += ` rolled ${spaces.A} & ${spaces.B}`;
+            break;
+        case 'home':
+            msg += `'s piece entered the home stretch!`;
+            break;
+        case 'reset': // blank out alert
+            msg = '';
+            classClr = "light";
+            break;
+        default: break;
+    }
+    createAlert(classClr, msg);
+}
+
 function setupChoices() {
     // html from bootstrap docs https://getbootstrap.com/docs/5.0/components/button-group/#checkbox-and-radio-button-groups
 
@@ -24,9 +77,28 @@ function setupChoices() {
     }
 }
 
-function updateModal(header, inPlay) {
+function updateModal(header, inPlay, pColor) {
     /* -- adding question to header -- */
-    rollDiv.querySelector('.headerTxt').textContent = header;
+    chooseCard.querySelector('.card-header').textContent = header;
+
+    // resetting colors
+    chooseCard.classList.remove();
+    cardContent.classList.remove();
+
+
+    // setting color
+    let classClr = 'light';
+
+    switch (pColor) {
+        case 'red': classClr = 'danger'; break;
+        case 'green': classClr = 'success'; break;
+        case 'blue': classClr = 'primary'; break;
+        case 'yellow': classClr = 'warning'; break;
+        default: break;
+    }
+
+    chooseCard.classList.add(`border-${classClr}`);
+    cardContent.classList.add(`text-${classClr}`)
 
     /* -- showing only available pieces -- */
     // clearing old choices

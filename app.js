@@ -1,9 +1,10 @@
 /* ---- DOM Elements ---- */
 /* from grid-main.js:
-// // rollDiv = document.querySelector('.roll-dice');
+-- -- rollDiv = document.querySelector('.roll-dice');
+-- -- btnGroup = rollDiv.querySelector('.btn-group');
+-- -- notifs = document.querySelector('.notifs');
 */
 const board = document.querySelector('#board');
-const alrt = document.querySelector('.alert');
 const rollBtn = rollDiv.querySelector('#collapsed');
 
 
@@ -158,44 +159,11 @@ function moveToStart() {
     movePiece(game.currentPiece, game.currentPl.startSp + 1);
 }
 
-function notify(notifn, spaces = null) {
-    let msg = game.currentPl.color;
-    let classColor = '';
+function notify(nType, spaces = null) {
+    let pColor = game.currentPl.color;
+    
+    notifyPlayers(nType, pColor, spaces);
 
-    // setting alert color based on player
-    switch (game.currentPl.color) {
-        case 'red': classColor = 'danger'; break;
-        case 'green': classColor = 'success'; break;
-        case 'blue': classColor = 'primary'; break;
-        case 'yellow': classColor = 'warning'; break;
-        default: break;
-    }
-
-    // setting msg based on type of notification
-    switch (notifn) {
-        case 'moved':
-            msg += ` moved ${spaces} spaces`;
-            break;
-        case 'added':
-            msg += ` put a piece on the board!`;
-            break;
-        case 'roll':
-            msg += ` rolled ${spaces.A} & ${spaces.B}`;
-            break;
-        case 'home':
-            msg += `'s piece entered the home stretch!`;
-            break;
-        case 'reset': // blank out alert
-            msg = '';
-            alrt.innerText = '';
-            classColor = "light";
-            break;
-        default: break;
-    }
-
-    console.log(msg)
-    alrt.innerText += '\n\n' + msg;
-    alrt.classList = [`alert alert-${classColor}`];
 }
 
 function prettyPrint(obj) {
@@ -240,13 +208,26 @@ function showModal(avail = undefined) {
         : game.currentPl.getFilteredPieces('play');
 
     // update UI
-    updateModal(header, inPlay);
-    rollDiv.classList.add('expand');
+    updateModal(header, inPlay, game.currentPl.color);
+    chooseCard.style.visibility = 'visible';
+    cardContent.style.visibility = 'visible';
 }
 
 /* ---- Event Handlers ---- */
 
 // player chose a piece
+btnGroup.addEventListener('click', event => {
+    // store choice
+    const id = parseInt(event.target.id);
+    game.setPiece(id);
+
+    // close modal
+    chooseCard.style.visibility = 'hidden';
+    cardContent.style.visibility = 'hidden';
+
+    // game logic
+    letsPlay();
+})
 btnGroup.querySelectorAll('.btn').forEach((btn => {
     btn.addEventListener('click', (event) => {
         // store choice
@@ -254,13 +235,14 @@ btnGroup.querySelectorAll('.btn').forEach((btn => {
         game.setPiece(id);
 
         // close modal
-        rollDiv.classList.remove('expand');
-        event.stopPropagation();
+        chooseCard.style.visibility = 'hidden';
+        cardContent.style.visibility = 'hidden';
 
         // game logic
         letsPlay();
     })
 }))
+
 
 // dice was rolled
 rollBtn.addEventListener('click', rollDice);

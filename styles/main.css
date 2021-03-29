@@ -1252,7 +1252,6 @@ input[type="button"].btn-block {
   color: #040505;
 }
 
-/* --- Importing fonts and stuff --- */
 body {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 15px;
@@ -1260,5 +1259,71 @@ body {
 
 .card {
   visibility: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.card .btn-group {
+  margin: 4px;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.card input {
+  display: none;
+}
+
+.alerts-container {
+  visibility: visible;
+}
+
+.alerts {
+  visibility: inherit;
+}
+
+/* -- Alert auto dismissal -- */
+@-webkit-keyframes fades {
+  0% {
+    display: "none";
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fades {
+  0% {
+    display: "none";
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.alert {
+  -webkit-animation: fades 4s cubic-bezier(0.15, 0, 0, 0.3);
+          animation: fades 4s cubic-bezier(0.15, 0, 0, 0.3);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 1px;
 }
 /*# sourceMappingURL=main.css.map */

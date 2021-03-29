@@ -11,9 +11,21 @@
 
   <body>
     <div class="grid-container">
-      <!-- Allowing player to choose pieces -->
+
       <!-- TO DO: on click, set active; on hover, highlight piece -->
       <div id="choosePieces">
+        <div class="card" id="chooseCard">
+          <div class="card-header">Choose</div>
+          <div class="card card-content">
+            <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
+            <div
+              class="btn-group"
+              role="group"
+            ></div>
+          </div>
+        </div>
+
+        <!-- TO DO: Split roll -->
         <div class="card" id="rollA">
           <div class="card-header">Which piece should move A spaces?</div>
           <ul class="list-group list-group-horizontal">
@@ -33,9 +45,6 @@
         </div>
       </div>
 
-      <!-- No animations = notify via UI alert -->
-      <div class="alert" role="alert"></div>
-
       <!-- The good stuff -->
       <div class="board">
         <div class="base-red"></div>
@@ -45,39 +54,40 @@
 
         <!-- player path -->
         <div class="arm-1">
-          <div class="home-red"></div>
+          <div class="home-red" id="redLn">
+            <div class="homeLn-container"></div>
+          </div>
         </div>
         <div class="arm-2">
-          <div class="home-yellow"></div>
+          <div class="home-yellow" id="yellowLn">
+            <div class="homeLn-lane-container"></div>
+          </div>
         </div>
         <div class="arm-3">
-          <div class="home-green"></div>
+          <div class="home-green" id="greenLn">
+            <div class="homeLn-container"></div>
+          </div>
         </div>
         <div class="arm-4">
-          <div class="home-blue"></div>
+          <div class="home-blue" id="blueLn">
+            <div class="homeLn-container"></div>
+          </div>
         </div>
         <div class="home">
           <div class="roll-dice">
-            <div id="collapsed">
-              <div id="rollTxt"></div>
-            </div>
-            <div id="expanded">
-              <div class="header">
-                <div class="headerTxt">Choose</div>
-              </div>
-              <div id="content">
-                <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons -->
-                <div
-                  class="btn-group"
-                  role="group"
-                  aria-label="Basic radio toggle button group"
-                ></div>
-              </div>
+            <button class="btn btn-dark" id="collapsed">
+              <div id="rollTxt">red player roll</div>
             </div>
           </div>
         </div>
+
+        <!-- No animations = notify via UI alert -->
+      <div class="notifs">
+        <div class="alerts-container"></div>
       </div>
     </div>
+      </div>
+
     <!-- scripts -->
     <script src="js/classes.js"></script>
     <script src="js/grid-main.js"></script>
