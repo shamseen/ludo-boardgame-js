@@ -11,7 +11,7 @@ class Player {
 
     createPieces() {
         for (let i = 0; i < 4; i++) {
-            this.pieces.push(new Piece());
+            this.pieces.push(new Piece(i));
         }
     }
 
@@ -39,11 +39,13 @@ class Player {
 }
 
 class Piece {
-    spaceNum = -1; // in base area
-    pathLeft = 43; // how far to home stretch
-    inBase = true;
-    inHome = false;
-    constructor() {
 
+    constructor(id) {
+        this.id = id;
+
+        this.spaceNum = -1; // in base area
+        this.pathLeft = 43; // how far to home stretch
+        this.inBase = true;
+        this.inHome = false;
     }
 }

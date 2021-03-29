@@ -102,7 +102,7 @@ function canPlayerChoose() {
 
         // ELSE: move active (player's choice)
         default:
-            rollDiv.classList.add('expand'); // show modal
+            showModal();
             break;
     }
 }
@@ -233,16 +233,15 @@ function rolledSix() {
 
 }
 
-function showModal() {
-    // const msg = addPiece ?
-    // `Which piece should enter play?` :
-    // `Which piece should move ${roll.sum} spaces?`;
-    const msg = `Which piece should move ${roll.sum} spaces?`;
+function showModal(avail = undefined) {
 
-    // update modal header
-    rollDiv.querySelector('.headerTxt').textContent = msg;
+    const header = `Which piece should move ${roll.sum} spaces?`;
+    const inPlay = avail !== undefined ? avail
+        : game.currentPl.getFilteredPieces('play');
 
-    // TO DO: show only available pieces
+    // update UI
+    updateModal(header, inPlay);
+    rollDiv.classList.add('expand');
 }
 
 /* ---- Event Handlers ---- */

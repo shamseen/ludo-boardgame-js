@@ -10,16 +10,39 @@ function setupChoices() {
 
     rollDiv.querySelector("#rollTxt").innerText = "red player roll";
 
-    rollDiv.querySelector(".headerTxt").innerText = "Which piece should enter play?";
+    rollDiv.querySelector(".headerTxt").innerText = "Player choice";
 
     for (let i = 0; i < 4; i++) {
 
         // radio button
         btnGroup.innerHTML +=
-            `<input type="radio" class="btn-check" name="btnradio" id="${i + 1}" autocomplete="off">`;
+            `<input type="radio" class="btn-check" name="btnradio" id="p${i}-btn" autocomplete="off">`;
 
         // label
         btnGroup.innerHTML +=
-            `<label class="btn btn-outline-primary" id="${i}" for="${i + 1}"> ${i + 1}</label>`;
+            `<label class="btn btn-outline-primary" id="${i}" for="p${i}-btn"> ${i + 1}</label>`;
     }
+}
+
+function updateModal(header, inPlay) {
+    /* -- adding question to header -- */
+    rollDiv.querySelector('.headerTxt').textContent = header;
+
+    /* -- showing only available pieces -- */
+    // clearing old choices
+    btnGroup.innerHTML = '';
+
+    // updating available pieces
+    inPlay.forEach(p => {
+
+        // radio button
+        btnGroup.innerHTML +=
+            `<input type="radio" class="btn-check" name="btnradio" id="p${p.id}-btn" autocomplete="off">`;
+
+        // label
+        btnGroup.innerHTML +=
+            `<label class="btn btn-outline-primary" id="${p.id}" for="p${p.id}-btn"> 
+                Space ${p.spaceNum + 1}
+            </label>`;
+    });
 }
