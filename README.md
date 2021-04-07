@@ -31,8 +31,9 @@ Players are dealt a random starting hand of four cards each. Each card represent
 
 ### Technologies used:
 - HTML5, CSS3
-- SCSS: Grid, Flexbox, modals, animation, and media query
-- JavaScript: loops, math methods/randomization, array methods, combined datatypes, event listeners, callback and recursive functions
+- SCSS: Grid, Flexbox, modals, animation, Bootstrap 4, media query
+- React / Node: components, Router, loops, math / randomization, array methods, custom classes, callbacks, event listeners
+- APIs: [Pubnub](https://www.pubnub.com/blog/javascript-multiplayer-game/) (online multiplayer), [Phaser 3](http://phaser.io/) (game engine).
 ___
 
 
