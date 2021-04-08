@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BoardRegion } from "./pathSegment";
+import { BoardRegion } from "./boardRegion";
 import "../styles/board.scss";
 
 
