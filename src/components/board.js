@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PathSegment from "./pathSegment";
+import { BoardRegion } from "./pathSegment";
 import "../styles/board.scss";
 
 
@@ -17,26 +17,33 @@ export default function Board({ G, ctx, moves }) {
     // warning - this layout is WEIRD.
     const makeBoard = () => {
         // temp obj for state
-        const props = [
+        const regions = [
             {
                 arm: 'arm-1',
-                spaces: []
+                path: [],
+                color: 'red',
+                home: []
             },
             {
                 arm: 'arm-2',
-                spaces: []
+                path: [],
+                color: 'yellow',
+                home: []
             },
             {
                 arm: 'arm-3',
-                spaces: []
+                path: [],
+                color: 'green',
+                home: []
             },
             {
                 arm: 'arm-4',
-                spaces: []
+                path: [],
+                color: 'blue',
+                home: []
             }
         ];
-        // TODO: link spaces to G.spaces
-
+        // TODO: link spaces to G.spaces, add home spaces
         /* -- Adding & assigning spaces to segments -- */
         let arm = '';
         let addTo = '';
@@ -98,19 +105,19 @@ export default function Board({ G, ctx, moves }) {
             // storing layout
             switch (addTo) {
                 case 'start':
-                    props[arm - 1].spaces.unshift(spaceDiv);
+                    regions[arm - 1].path.unshift(spaceDiv);
                     break;
                 case 'end':
-                    props[arm - 1].spaces.push(spaceDiv);
+                    regions[arm - 1].path.push(spaceDiv);
                     break;
                 case "middle":
-                    props[arm - 1].spaces.splice(i, 0, spaceDiv);
+                    regions[arm - 1].path.splice(i, 0, spaceDiv);
                     break;
             }
         }
 
         /* --- Updating state with child components --- */
-        setSegmentProps([...props]);
+        setSegmentProps([...regions]);
     }
 
     return (
@@ -124,7 +131,7 @@ export default function Board({ G, ctx, moves }) {
 
             {/* <!-- player path --> */}
             {segmentProps.map((p, i) => {
-                return <PathSegment key={i} seg={p} />;
+                return <BoardRegion key={i} region={p} />;
             })}
 
             {/* <!-- win space + dice btn --> */}

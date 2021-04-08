@@ -31,6 +31,11 @@ const Ludo = {
         clickCell: (G, ctx, id) => {
             G.cells[id] = ctx.currentPlayer;
         },
+
+        rollDice: (G, ctx) => {
+            //returns an array of two dice values
+            const dice = ctx.randomDie(6, 2);
+        }
     },
 };
 
@@ -40,7 +45,8 @@ export const GameClient = Client(
     {
         game: Ludo, // game state
         board: Board,
-        numPlayers: 2
+        numPlayers: 2,
+        debug: false
         // TODO: remove debug panel
     }
 );
