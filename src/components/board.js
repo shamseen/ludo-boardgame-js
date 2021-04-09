@@ -7,47 +7,44 @@ import "../styles/board.scss";
 export default function Board({ G, ctx, moves }) {
 
     // setting up each segment of path
-    const [segmentProps, setSegmentProps] = useState([]);
+    const [regionProps, setRegionProps] = useState([]);
 
-    /* --- Populating pathArms --- */
+    /* --- Board layout only on initial render --- */
+    // warning - this layout is WEIRD
     useEffect(() => {
-        makeBoard();
-    }, []);
-
-    // warning - this layout is WEIRD.
-    const makeBoard = () => {
         // temp obj for state
         const regions = [
             {
                 arm: 'arm-1',
                 path: [],
-                color: 'red',
+                player: 'red',
                 home: []
             },
             {
                 arm: 'arm-2',
                 path: [],
-                color: 'yellow',
+                player: 'yellow',
                 home: []
             },
             {
                 arm: 'arm-3',
                 path: [],
-                color: 'green',
+                player: 'green',
                 home: []
             },
             {
                 arm: 'arm-4',
                 path: [],
-                color: 'blue',
+                player: 'blue',
                 home: []
             }
         ];
+
         // TODO: link spaces to G.spaces, add home spaces
-        /* -- Adding & assigning spaces to segments -- */
+        /* -- populating spaces + board layout -- */
         let arm = '';
         let addTo = '';
-        for (let i = 0; i < G.spaces.length; i++) {
+        for (let i = 0; i < G.pathLength; i++) {
             // new space for board
             const spaceDiv = <div className="space path" id={i} key={i}></div>;
 
@@ -117,8 +114,8 @@ export default function Board({ G, ctx, moves }) {
         }
 
         /* --- Updating state with child components --- */
-        setSegmentProps([...regions]);
-    }
+        setRegionProps([...regions]);
+    }, []);
 
     return (
         <div className="board">
@@ -130,14 +127,14 @@ export default function Board({ G, ctx, moves }) {
             <div className="base-green"></div>
 
             {/* <!-- player path --> */}
-            {segmentProps.map((p, i) => {
+            {regionProps.map((p, i) => {
                 return <BoardRegion key={i} region={p} />;
             })}
 
-            {/* <!-- win space + dice btn --> */}
+            {/* <!-- win space + dice btn (tied to game state move) --> */}
             <div className="home">
                 <div className="roll-dice">
-                    <button className="btn" id="collapsed">
+                    <button className="btn" id="collapsed" onClick={moves.rollDice}>
                         <div id="rollTxt">Roll dice!</div>
                     </button>
                 </div>
