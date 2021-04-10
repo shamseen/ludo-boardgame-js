@@ -1,41 +1,26 @@
-import { useState, useEffect, createContext } from "react";
-import ChoicesModal from "./choicesModal.js";
+import { useState, useEffect } from "react";
+import { canPlayerChoose } from "../gameLogic/gameLogic.js";
+import ChoiceCard from "./choiceCard.js";
 
 export default function ChoicesPanel({ G, moves, player }) {
+    const [modalData, setModalData] = useState(false);
+
     useEffect(() => {
         console.log('changed players')
+
         if (!G.canMovePieces) {
             console.log("can't move pieces"); return null
         }
 
-        const basePiece = getFilteredPieces('base');
-        console.log('base piece - ' + basePiece)
-        if (G.roll.hasSix && basePiece > -1) {
-            console.log('needs to move to start')
-            moves.moveToStart(basePiece);
-            // moves.movePiece(basePiece);
-        }
-    }, [player, G.canMovePieces])
+        setModalData(canPlayerChoose(G, moves));
 
-
-    function getFilteredPieces(loc) {
-        switch (loc) {
-            case 'base':
-                // piece w space num -1 is in base
-                return G.currentPlayer.pieces.findIndex(p => p === -1);
-            case 'home':
-                // piece w space num 50 has left the board
-                return this.pieces.findIndex(p => p === 50);
-            case 'play':
-                return this.pieces.filter(p => p < 44 && p > -1);
-            default: break;
-        }
-
-        return filtered;
-    }
+    }, [player, G.canMovePieces]);
 
     return (
         <div id="choosePieces">
+
+            {modalData.show ? <ChoiceCard G={G} pieces={modalData.pieces} /> : ''}
+
             <div className="card" id="chooseCard">
                 <div className="card-header">Choose</div>
                 <div className="card card-content">
@@ -48,7 +33,7 @@ export default function ChoicesPanel({ G, moves, player }) {
             </div>
 
             {/* <!-- TO DO: Split roll --> */}
-            <div className="card" id="rollA">
+            {/* <div className="card" id="rollA">
                 <div className="card-header">Which piece should move {G.roll.A} spaces?</div>
                 <ul className="list-group list-group-horizontal">
                     <a className="list-group-item list-group-item-action">Action item</a>
@@ -64,7 +49,7 @@ export default function ChoicesPanel({ G, moves, player }) {
                     <a className="list-group-item list-group-item-action">Action item</a>
                     <a className="list-group-item list-group-item-action">Action item</a>
                 </ul>
-            </div>
+            </div> */}
         </div>
     )
 }

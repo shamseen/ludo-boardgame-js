@@ -1,11 +1,10 @@
 // event handlers, kindof.
 // takes state, metadata, any other data needed
 const Moves = {
-    movePiece: (G, ctx, pieceIds) => {
-        // if (player.activePieces === 0) {
-        //     return;
-        // }
-
+    movePiece: (G, ctx, pieceId, spaces) => {
+        G.currentPlayer.pieces[pieceId] += spaces;
+        G.players[ctx.currentPlayer] = G.currentPlayer;
+        console.log('moved piece ' + pieceId + ' to space ' + G.currentPlayer.pieces[pieceId])
         ctx.events.endTurn();
     },
 
@@ -14,8 +13,6 @@ const Moves = {
         G.currentPlayer.pieces[pieceId] = G.currentPlayer.startSpace;
         G.currentPlayer.activePieces++;
         G.players[ctx.currentPlayer] = G.currentPlayer;
-
-        ctx.events.endTurn();
     },
 
     rollDice: (G, ctx) => {
