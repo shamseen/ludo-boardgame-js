@@ -10,15 +10,15 @@ const Moves = {
     },
 
     moveToStart: (G, ctx, pieceId) => {
+        console.log('moved to start - ' + ctx.currentPlayer);
         G.currentPlayer.pieces[pieceId] = G.currentPlayer.startSpace;
         G.currentPlayer.activePieces++;
+        G.players[ctx.currentPlayer] = G.currentPlayer;
 
         ctx.events.endTurn();
     },
 
     rollDice: (G, ctx) => {
-        G.currentPlayer = G.players[ctx.currentPlayer];
-
         //returns an array of two dice values
         const dice = ctx.random.Die(6, 2);
 
@@ -30,7 +30,7 @@ const Moves = {
 
         G.roll.sum = G.roll.A + G.roll.B;
         G.roll.hasSix = G.roll.A === 6 || G.roll.B === 6;
-        console.log(JSON.stringify(G.roll, null, 2));
+        console.log(G.currentPlayer.color + JSON.stringify(G.roll, null, 2));
 
         if (G.currentPlayer.activePieces === 0 && !G.roll.hasSix) {
             G.canMovePieces = false;

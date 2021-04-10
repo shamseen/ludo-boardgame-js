@@ -9,7 +9,7 @@ import "../styles/app.scss";
 export default function GameView({ G, ctx, moves }) {
     return (
         <div className="gameView">
-            <ChoicesPanel G={G} moves={moves} />
+            <ChoicesPanel G={G} moves={moves} player={ctx.currentPlayer} />
             <Board G={G} ctx={ctx} moves={moves} />
             {/* <AlertToasts/> */}
         </div>

@@ -72,22 +72,21 @@ const Ludo = {
     // takes state, metadata, any other data needed
     moves: { ...Moves },
 
-    // turn: {
+    turn: {
 
-    //     // updating game state's current player with every new turn
-    //     onBegin: (G, ctx) => { G.currentPlayer = G.players[ctx.currentPlayer] },
+        // updating game state's current player with every new turn
+        onBegin: (G, ctx) => { G.currentPlayer = G.players[ctx.currentPlayer] },
+        onEnd: (G, ctx) => { G.canMovePieces = false },
 
-    //     stages: {
-    //         rolling: {
-    //             next: 'moving',
-    //             moves: { rolldice }
-    //         },
+        stages: {
+            rolling: {
+                next: 'moving'
+            },
 
-    //         moving: {
-    //             moves: { movePieces }
-    //         }
-    //     }
-    // }
+            moving: {
+            }
+        }
+    }
 };
 
 
