@@ -1,4 +1,4 @@
-import { GameClient } from "./components/gameSetup";
+import { GameClient } from "./gameLogic/gameSetup";
 import "./styles/app.scss";
 
 export default function App() {

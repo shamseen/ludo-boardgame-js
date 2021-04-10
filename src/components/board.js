@@ -131,7 +131,7 @@ export default function Board({ G, ctx, moves }) {
                 return <BoardRegion key={i} region={p} />;
             })}
 
-            {/* <!-- dice btn (tied to game state move) --> */}
+            {/* <!-- dice btn => tied to game state move --> */}
             <div className="home">
                 <div className="roll-dice">
                     <button className="btn" id="collapsed" onClick={moves.rollDice}>

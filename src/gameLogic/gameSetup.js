@@ -1,4 +1,5 @@
-import GameView from "./gameView.js";
+import GameView from "../components/gameView.js";
+import Moves from "./moves.js";
 import { Client } from "boardgame.io/react";
 
 /* ---- Game object ---- */
@@ -64,40 +65,7 @@ const Ludo = {
 
     // event handlers, kindof.
     // takes state, metadata, any other data needed
-    moves: {
-        movePiece: (G, ctx, player, piece) => {
-            // if (player.activePieces === 0) {
-            //     return;
-            // }
-
-            ctx.events.endTurn();
-        },
-        rollDice: (G, ctx) => {
-            //returns an array of two dice values
-            const dice = ctx.random.Die(6, 2);
-            G.roll = {
-                A: dice[0],
-                B: dice[1]
-            }
-
-            G.roll.sum = G.roll.A + G.roll.B;
-            G.roll.hasSix = G.A === 6 || G.B === 6;
-
-            ctx.events.endStage();
-        },
-
-        /* --- DEBUGGING ONLY --- */
-        getPlayers: (G, ctx, str) => {
-            let print;
-            switch (str) {
-                case "c": print = ctx; break;
-                case "s": print = ctx.player.state; break;
-                default: print = ctx.player; break;
-            }
-            console.log(JSON.stringify(print, null, 2));
-            return print;
-        }
-    }
+    moves: { ...Moves }
 };
 
 
