@@ -1,7 +1,7 @@
 // import { useState, useEffect } from "react";
 import Board from "./board.js";
 // import AlertToasts from "./alertToasts.js";
-// import ChoicesModal from "./choicesModal.js";
+import ChoicesPanel from "./choicesPanel.js";
 import "../styles/app.scss";
 
 
@@ -9,7 +9,7 @@ import "../styles/app.scss";
 export default function GameView({ G, ctx, moves }) {
     return (
         <div className="gameView">
-            {/* <ChoicesModal /> */}
+            <ChoicesPanel G={G} moves={moves} />
             <Board G={G} ctx={ctx} moves={moves} />
             {/* <AlertToasts/> */}
         </div>

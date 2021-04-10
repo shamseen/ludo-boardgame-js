@@ -1,5 +1,6 @@
-import "../styles/choiceCards.scss";
+// import "../styles/choicesModal.scss";
 
-export default function ChoiceCards(props) {
-
+export default function ChoiceCards({ G, ctx, moves }) {
+    // console.log(G);
+    return null;
 }

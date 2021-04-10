@@ -7,8 +7,10 @@ const Ludo = {
     // constructor
     setup: (ctx) => {
         let initialState = {
+            currentPlayer: {},
             players: [],
             roll: {},
+            canMovePieces: false,
             pathLength: 44,
             homeLength: 4,
             spaces: Array(44).fill(null),
@@ -50,14 +52,17 @@ const Ludo = {
                 color: prop.color,
                 startSpace: prop.startSpace,
                 activePieces: 0,
-                pieces: {
-                    p1: -1,
-                    p2: -1,
-                    p3: -1,
-                    p4: -1
-                }
+                pieces: [
+                    -1,
+                    -1,
+                    -1,
+                    -1
+                ]
             }
         });
+
+        // setting current player
+        initialState.currentPlayer = initialState.players[0];
 
         return initialState;
     },
@@ -65,7 +70,24 @@ const Ludo = {
 
     // event handlers, kindof.
     // takes state, metadata, any other data needed
-    moves: { ...Moves }
+    moves: { ...Moves },
+
+    // turn: {
+
+    //     // updating game state's current player with every new turn
+    //     onBegin: (G, ctx) => { G.currentPlayer = G.players[ctx.currentPlayer] },
+
+    //     stages: {
+    //         rolling: {
+    //             next: 'moving',
+    //             moves: { rolldice }
+    //         },
+
+    //         moving: {
+    //             moves: { movePieces }
+    //         }
+    //     }
+    // }
 };
 
 
