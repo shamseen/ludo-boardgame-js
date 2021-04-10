@@ -1,4 +1,4 @@
-import { GameClient } from "./components/views/game";
+import { GameClient } from "./components/gameSetup";
 import "./styles/app.scss";
 
 export default function App() {
