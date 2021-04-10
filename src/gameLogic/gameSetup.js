@@ -21,7 +21,6 @@ const Ludo = {
                 [Array(4).fill(null)],
                 [Array(4).fill(null)]
             ]
-
             // TO DO: bases
         }
 

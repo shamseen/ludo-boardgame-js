@@ -1,26 +1,34 @@
-// import "../styles/choicesModal.scss";
+import "../styles/choiceCard.scss";
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
+import { useFadedShadowStyles } from '@mui-treasury/styles/shadow/faded';
 
-export default function ChoiceCard({ G, pieces }) {
+
+export default function ChoiceCard({ G, pieces, clicked }) {
+
+    // elevated effect on header
+    const cardHeaderShadowStyles = useFadedShadowStyles();
 
     return (
-        <div className="card bg-danger" id="chooseCard">
-            <div className="card-header">Which piece should move {G.roll.sum} spaces?</div>
-            <div className="card card-content">
-                {/* <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons --> */}
-                <div className="btn-group" role="group">
-                    {pieces.map(p => {
-                        return (
-                            <div key={p}>
-                                <input type="radio" className="btn-check" name="btnradio" id={p} autocomplete="off" />
-                                <label className="btn btn-outline-primary" id={p} for={p}>
-                                    Space {G.currentPlayer.pieces[p] + 1}
-                                </label>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        </div>
+        <Card>
+            {/* src: https://mui-treasury.com/styles/card-header/ */}
+            <CardHeader
+                className={`${cardHeaderShadowStyles.root} ${G.currentPlayer.color}`}
+                title={`Which piece should move ${G.roll.sum} spaces?`}
+            >
+            </CardHeader>
+            <CardActions>
+                {pieces.map(p => {
+                    return <Button variant="outlined" key={p}
+                        onClick={(e) => { clicked(e, p) }}
+                        className={G.currentPlayer.color}>
+                        Space {G.currentPlayer.pieces[p] + 1}
+                    </Button>
+                })}
+            </CardActions>
+        </Card >
     )
 
 }

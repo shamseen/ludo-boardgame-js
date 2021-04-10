@@ -1,0 +1,40 @@
+.red {
+  background-color: #fc4848 !important;
+  border-color: #b30000 !important;
+  color: white !important;
+}
+
+.red:hover {
+  background-color: transparent !important;
+}
+
+.green {
+  background-color: #48fc68 !important;
+  border-color: #00c80a !important;
+  color: white !important;
+}
+
+.green:hover {
+  background-color: transparent !important;
+}
+
+.blue {
+  background-color: #896ce5 !important;
+  border-color: #4c3b68 !important;
+  color: white !important;
+}
+
+.blue:hover {
+  background-color: transparent !important;
+}
+
+.yellow {
+  background-color: #ffc83d !important;
+  border-color: #f7910c !important;
+  color: black !important;
+}
+
+.yellow:hover {
+  background-color: transparent !important;
+}
+/*# sourceMappingURL=choiceCard.css.map */

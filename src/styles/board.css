@@ -1,0 +1,285 @@
+.board {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 210px 126px 210px;
+      grid-template-columns: 210px 126px 210px;
+  -ms-grid-rows: 210px 126px 210px;
+      grid-template-rows: 210px 126px 210px;
+  gap: 0px 0px;
+      grid-template-areas: "base-red arm-2 base-yellow" "arm-1 home arm-3" "base-blue arm-4 base-green";
+  grid-area: board;
+  position: relative;
+  height: 100vh;
+}
+
+.base-red {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: base-red;
+}
+
+.base-yellow {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: base-yellow;
+}
+
+.base-blue {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: base-blue;
+}
+
+.base-green {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: base-green;
+}
+
+[class*='arm'] {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.arm-1 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (42px)[3];
+  -ms-grid-columns: (42px)[5];
+      grid-template: repeat(3, 42px)/repeat(5, 42px);
+  gap: 0px 0px;
+      grid-template-areas: ". . . . ." ". home-red home-red home-red home-red" ". . . . .";
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: arm-1;
+}
+
+.arm-3 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (42px)[3];
+  -ms-grid-columns: (42px)[5];
+      grid-template: repeat(3, 42px)/repeat(5, 42px);
+  gap: 0px 0px;
+      grid-template-areas: ". . . . ." "home-green home-green home-green home-green ." ". . . . .";
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: arm-3;
+}
+
+.arm-2 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (42px)[5];
+  -ms-grid-columns: (42px)[3];
+      grid-template: repeat(5, 42px)/repeat(3, 42px);
+  gap: 0px 0px;
+      grid-template-areas: ". . ." ". home-yellow ." ". home-yellow ." ". home-yellow ." ". home-yellow .";
+  grid-auto-flow: column;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: arm-2;
+}
+
+.arm-4 {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (42px)[5];
+  -ms-grid-columns: (42px)[3];
+      grid-template: repeat(5, 42px)/repeat(3, 42px);
+  gap: 0px 0px;
+      grid-template-areas: ". home-blue ." ". home-blue ." ". home-blue ." ". home-blue ." ". . .";
+  grid-auto-flow: column;
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: arm-4;
+}
+
+.home-red {
+  display: -ms-grid;
+  display: grid;
+  grid-template: 1;
+  gap: 0px 0px;
+      grid-template-areas: ".";
+  grid-auto-flow: row;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
+  grid-area: home-red;
+}
+
+.home-red .homeLn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+}
+
+.home-green {
+  display: -ms-grid;
+  display: grid;
+  grid-template: 1;
+  gap: 0px 0px;
+      grid-template-areas: ".";
+  grid-auto-flow: row;
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: home-green;
+}
+
+.home-green .homeLn-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+}
+
+.home-yellow {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (42px)[4];
+  -ms-grid-columns: 42px;
+      grid-template: repeat(4, 42px)/42px;
+  gap: 0px 0px;
+      grid-template-areas: "." "." "." ".";
+  grid-auto-flow: column;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 4;
+  -ms-grid-column: 2;
+  grid-area: home-yellow;
+}
+
+.home-blue {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (42px)[4];
+  -ms-grid-columns: 42px;
+      grid-template: repeat(4, 42px)/42px;
+  gap: 0px 0px;
+      grid-template-areas: "." "." "." ".";
+  grid-auto-flow: column;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 4;
+  -ms-grid-column: 2;
+  grid-area: home-blue;
+}
+
+.home {
+  display: -ms-grid;
+  display: grid;
+  grid-template: 1;
+  gap: 0px 0px;
+      grid-template-areas: ".";
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: home;
+}
+
+* {
+  z-index: 0;
+}
+
+.space {
+  display: block;
+  height: auto;
+  background: center / contain no-repeat;
+  margin: 0;
+  border: 1px solid;
+  height: 40px;
+  width: 40px;
+  opacity: 0.7;
+  /* highlight space on btn hover! */
+}
+
+.space.path {
+  background-color: #e7e5db;
+  border-color: grey;
+}
+
+.space[class*="red"] {
+  background-color: #fc4848;
+  border-color: #b30000;
+  color: white;
+}
+
+.space[class*="green"] {
+  background-color: #48fc68;
+  border-color: #00c80a;
+  color: white;
+}
+
+.space[class*="blue"] {
+  background-color: #896ce5;
+  border-color: #4c3b68;
+  color: white;
+}
+
+.space[class*="yellow"] {
+  background-color: #ffc83d;
+  border-color: #f7910c;
+  color: black;
+}
+
+.space.highLight {
+  opacity: 0.3;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+
+.space .overlay {
+  top: 0;
+  bottom: 0;
+  height: 42px;
+  width: 42px;
+  opacity: 0.6;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  z-index: 1;
+}
+
+.roll-dice {
+  background: #dedbdf;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.roll-dice button {
+  width: 85%;
+  height: 70%;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.roll-dice #rollTxt {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 16px;
+  line-height: 32px;
+  margin-left: 10px;
+}
+/*# sourceMappingURL=board.css.map */

@@ -1,0 +1,54 @@
+@mixin playerStyle ($clr){
+  $bg: '';
+  $border: '';
+  $text: white;
+  
+  @if $clr == 'red' {
+    $bg: rgb(252, 72, 72);
+    $border: rgb(179, 0, 0);
+  }
+  @else if $clr == 'green' {
+    $bg: rgb(72, 252, 104);
+    $border: rgb(0, 200, 10);
+  }
+  @else if $clr == 'blue' {
+    $bg: rgb(137,108,229);
+    $border: rgb(76, 59, 104);
+  }
+  @else if $clr == 'yellow' {
+    $bg: rgb(255,200,61);
+    $border: rgb(247, 145, 12);
+    $text:black;
+  }
+
+  background-color: $bg !important;
+  border-color: $border !important;
+  color: $text !important;
+  &:hover {
+    background-color: transparent !important;
+  }
+}
+.red {
+  @include playerStyle('red');
+  }
+
+  .green {
+    @include playerStyle('green');
+  }
+  .blue {
+    @include playerStyle('blue');
+  }
+  .yellow {
+    @include playerStyle('yellow');
+  }
+
+// Card {
+//     visibility: hidden;
+//     display: flex;
+//     flex-flow: row wrap;
+//     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    
+//     Button {
+      
+//   }
+//   }

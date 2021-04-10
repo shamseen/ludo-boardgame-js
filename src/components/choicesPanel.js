@@ -16,10 +16,18 @@ export default function ChoicesPanel({ G, moves, player }) {
 
     }, [player, G.canMovePieces]);
 
+    const buttonClicked = (event, pieceId) => {
+        moves.movePiece(pieceId, G.roll.sum);
+        setModalData({
+            show: false,
+            pieces: []
+        })
+    }
+
     return (
         <div id="choosePieces">
 
-            {modalData.show ? <ChoiceCard G={G} pieces={modalData.pieces} /> : ''}
+            {modalData.show ? <ChoiceCard G={G} pieces={modalData.pieces} clicked={buttonClicked} /> : ''}
 
             <div className="card" id="chooseCard">
                 <div className="card-header">Choose</div>

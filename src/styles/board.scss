@@ -4,6 +4,34 @@ $cell: $square + 2; //accounting for border
 $armL: $cell*5;
 $armW: $cell*3;
 
+@mixin playerStyle ($clr){
+  $bg: '';
+  $border: '';
+  $text: white;
+  
+  @if $clr == 'red' {
+    $bg: rgb(252, 72, 72);
+    $border: rgb(179, 0, 0);
+  }
+  @else if $clr == 'green' {
+    $bg: rgb(72, 252, 104);
+    $border: rgb(0, 200, 10);
+  }
+  @else if $clr == 'blue' {
+    $bg: rgb(137,108,229);
+    $border: rgb(76, 59, 104);
+  }
+  @else if $clr == 'yellow' {
+    $bg: rgb(255,200,61);
+    $border: rgb(247, 145, 12);
+    $text:black;
+  }
+
+  background-color: $bg;
+  border-color: $border;
+  color: $text;
+}
+
 .board {
     display: grid;
     grid-template-columns: $armL $armW $armL;
@@ -174,21 +202,17 @@ $armW: $cell*3;
     }
   
     &[class*="red"] {
-      background-color: rgb(252, 72, 72);
-      border-color: rgb(179, 0, 0);
+      @include playerStyle('red');
     }
   
     &[class*="green"] {
-      background-color: rgb(72, 252, 104);
-      border-color: rgb(0, 200, 10);
+      @include playerStyle('green');
     }
     &[class*="blue"] {
-      background-color: rgb(137,108,229);
-      border-color: rgb(76, 59, 104);
+      @include playerStyle('blue');
     }
     &[class*="yellow"] {
-      background-color: rgb(255,200,61);
-      border-color: rgb(247, 145, 12);
+      @include playerStyle('yellow');
     }
   
     /* highlight space on btn hover! */
