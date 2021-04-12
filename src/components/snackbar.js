@@ -1,8 +1,10 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import { useSnackbar } from 'notistack';
 
 export default function SimpleSnackbar({ G, alertData }) {
+    // const [msg, setMsg] = useState(undefined);
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
     // setting alert message based on move just played

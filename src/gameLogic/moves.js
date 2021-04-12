@@ -38,6 +38,11 @@ const Moves = {
         ctx.events.endStage();
     },
 
+    setNewMove: (G, ctx, move) => {
+        G.newMove = move;
+        G.moveTrigger = !G.moveTrigger;
+    },
+
     /* --- State get functionality --- */
 
     getPieceBySpace: (G, ctx, space) => {

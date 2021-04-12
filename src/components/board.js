@@ -4,7 +4,7 @@ import "../styles/board.scss";
 
 
 // takes game state, game metadata, possible moves
-export default function Board({ G, ctx, moves }) {
+export default function Board({ G, ctx, moves, alertUsers }) {
 
     // setting up each segment of path
     const [regionProps, setRegionProps] = useState([]);
@@ -117,6 +117,14 @@ export default function Board({ G, ctx, moves }) {
         setRegionProps([...regions]);
     }, []);
 
+
+    /* --- Event handlers --- */
+    const onDiceRoll = () => {
+        console.log('============roll')
+        alertUsers('roll');
+        moves.rollDice();
+    }
+
     return (
         <div className="board">
 
@@ -134,7 +142,7 @@ export default function Board({ G, ctx, moves }) {
             {/* <!-- dice btn => tied to game state move --> */}
             <div className="home">
                 <div className="roll-dice">
-                    <button className="btn" id="collapsed" onClick={moves.rollDice}>
+                    <button className="btn" id="collapsed" onClick={onDiceRoll}>
                         <div id="rollTxt">Roll dice!</div>
                     </button>
                 </div>

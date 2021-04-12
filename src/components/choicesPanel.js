@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { canPlayerChoose } from "../gameLogic/gameLogic.js";
 import ChoiceCard from "./choiceCard.js";
 
-export default function ChoicesPanel({ G, moves, player }) {
+export default function ChoicesPanel({ G, moves, player, alertUsers }) {
     const [modalData, setModalData] = useState(false);
 
     useEffect(() => {
@@ -13,15 +13,20 @@ export default function ChoicesPanel({ G, moves, player }) {
         }
 
         setModalData(canPlayerChoose(G, moves));
+        
+        if (modalData.move === 'start') {
+            alertUsers('start')
+        }
 
     }, [player, G.canMovePieces]);
 
     const buttonClicked = (event, pieceId) => {
+        alertUsers('moved', pieceId, G.roll.sum);
         moves.movePiece(pieceId, G.roll.sum);
         setModalData({
             show: false,
             pieces: []
-        })
+        });
     }
 
     return (

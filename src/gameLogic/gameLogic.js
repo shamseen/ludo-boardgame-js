@@ -9,7 +9,8 @@ export function canPlayerChoose(G, moves) {
 
         return {
             show: false,
-            pieces: []
+            pieces: [],
+            move: 'start'
         };
     }
 
@@ -20,14 +21,16 @@ export function canPlayerChoose(G, moves) {
         moves.movePiece(inPlay[0], G.roll.sum);
         return {
             show: false,
-            pieces: []
+            pieces: [],
+            move: ''
         };
     }
 
     console.log(inPlay);
     return {
         show: true,
-        pieces: inPlay
+        pieces: inPlay,
+        move: ''
     };
 
     /* --- copypasta from old code --- */

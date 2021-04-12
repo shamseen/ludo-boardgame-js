@@ -7,12 +7,14 @@ const Ludo = {
     // constructor
     setup: (ctx) => {
         let initialState = {
-            currentPlayer: {},
             players: [],
             roll: {},
             canMovePieces: false,
             pathLength: 44,
             homeLength: 4,
+            currentPlayer: {},
+            newMove: '',
+            moveTrigger: false,
             spaces: Array(44).fill(null),
             homeStretch: [
                 // TO DO: store player info?
@@ -76,7 +78,7 @@ const Ludo = {
         // updating game state's current player with every new turn
         onBegin: (G, ctx) => { G.currentPlayer = G.players[ctx.currentPlayer] },
         onEnd: (G, ctx) => { G.canMovePieces = false },
-
+                
         stages: {
             rolling: {
                 next: 'moving'
