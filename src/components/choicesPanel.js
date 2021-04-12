@@ -30,7 +30,7 @@ export default function ChoicesPanel({ G, moves, player, alertUsers }) {
     }
 
     return (
-        <div id="choosePieces">
+        <div id="choosePieces" className="choosePieces">
 
             {modalData.show ? <ChoiceCard G={G} pieces={modalData.pieces} clicked={buttonClicked} /> : ''}
 

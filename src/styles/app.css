@@ -2,4 +2,18 @@ html {
   background-color: #b56ab0;
   background-image: url(http://www.transparenttextures.com/patterns/pool-table.png);
 }
+
+.gameView {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 546px 1fr;
+      grid-template-columns: 1fr 546px 1fr;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+  gap: 0px 0px;
+      grid-template-areas: "choosePieces board .";
+  position: relative;
+  margin: 2vh;
+  max-height: 100vh;
+}
 /*# sourceMappingURL=app.css.map */

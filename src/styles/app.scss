@@ -1,4 +1,21 @@
+// Global Variables
+$square: 40px;
+$cell: $square + 2; //accounting for border
+$armL: $cell*5;
+$armW: $cell*3;
+
 html {
     background-color: #b56ab0;
     background-image: url(http://www.transparenttextures.com/patterns/pool-table.png);
 }
+
+.gameView {
+    display: grid;
+    grid-template-columns: 1fr 13*$cell  1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: "choosePieces board .";
+    position: relative;
+    margin: 2vh;
+    max-height: 100vh;
+  }
