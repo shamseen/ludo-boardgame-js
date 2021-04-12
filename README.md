@@ -1,56 +1,63 @@
-## Ludo - In Your Browser!
+# Ludo - In Your Browser!
 
 *inspired by the game [Ludo](https://en.wikipedia.org/wiki/Ludo_(board_game)), derived from Pachisi - originally developed in India circa 6th century C.E.*
 
 ___
+## Game summary
+ 
+ Ludo is a strategy board game for 2 - 4 players (here, we will have 2). Each player has 4 tokens and rolls two dice.
+ 
+ 1. Sequence of turns: Red - Yellow - Green - Blue
+ 2. All tokens stay in player bases. Players can add a piece to the board by rolling a 6 on one die face.
+ 3. If a player has multiple pieces on the board, they will get to choose which piece to move.
+
+ **Win condition:** The first that gets all four tokens to home!
+
+ **Features:** a button to roll the dice, a card with buttons for Rule 3, notifications at the bottom for each new move from every player.
+
+<details>
+    <summary>Rules to be implemented</summary>
+    4. If player A's token lands on the space of player B's token, token B must return to the base :(
+    5. Players can split their rolls by die face: if it is a 6 + 2, players can choose which piece moves 2, which moves 6 (or enters the board). 
+</details>
+
+___
+## App specs
+- First refactored the whole thing to be a react app (copy/pasting HTML)
+
+- Then followed the `boardgame.io` tutorial for a simple 2-player, local game.
+
+- Finally, extracted HTML to JSX and reorganized component structure (involving a lot of not-so-great practices 😬) <= this is where most of my time went
+
 ### Planning:
+- Feature / bug tracking through Github Projects / Issues
 - CSS grid mockup using [Layoutit Grid](https://grid.layoutit.com/)
-- - <details>
+     <details>
     <summary> diagram </summary>
     ![Grid diagram](/markdown/img/ludo-grid.png?raw=true)
     </details>
 
-<details>
-  <summary>copypasta overview</summary>
-  
-Pandemic is a cooperative strategy game where multiple players work to cure four dangerous diseases before they take over the world. In this adaptation, two players are up against four deadly diseases. With each turn, they draw a new card which offers potential for treating or curing disease, but they also confront a new disease infection site.
-</details>
+- Game state setup
 
-
-### Game summary (WIP):
- - 44 spaces
- - 
-
-<details>
-  <summary>(copypasta)</summary>
- 48 worldwide cities are displayed on a central console. Four diseases are endemic in the game universe, each represented by a different color (yellow, blue, black, and red). The goal of the game is to cure all four diseases before one of them takes over the world. Players work together to accomplish this goal: humanity's fate is in the balance!
-Players are dealt a random starting hand of four cards each. Each card represents a city. Toggling headers and button texts cue gameplay. On each turn, the player clicks the "Draw Cards" button to draw a new random card to add to their hand. Next, they click the "Infect" button to infect a new city. If either player has the card for the infected city in their hand, they turn this card in to treat the disease (indicated by doctor symbol). Otherwise, the infected city remains infected (indicated by a biohazard symbol). Randomly inserted throughout the player deck are Epidemic cards, which create a bonus triple infection instead of supplying a new city card. The game ends when one of the following conditions is met:
-**Win Condition:** each disease (yellow, blue, black, and red) is cured. This is accomplished by players collecting sets of five city cards in the respective colors
-**Lose Conditions:** the 12 countries afflicted by any single disease are all wiped out, leaving this disease to take over the world, OR the players run out of player cards.
-</details>
+    ![Grid diagram](https://camo.githubusercontent.com/8dac142d04660d400c30e061be7a0674a5f8b77bde4f11a34f40e8a89bdd40f3/68747470733a2f2f6d65726d6169642e696e6b2f696d672f65794a6a6232526c496a6f695a334a686347676756455263626941674943424857317769523246745a53426b5a575a70626d6c306157397549436877624746706269424b55796c63496c30674c53302d49464e6258434a545a584a325a5849674b48427359576c75494570544b5677695856787549434167494563674c53302d49454e6258434a47636d39756443316c626d51675932396b5a53416f6257463549476c75593278315a475567536c4e594b56776958534973496d316c636d3168615751694f6e73696447686c625755694f694a6b5a575a6864577830496e3073496e56775a4746305a55566b61585276636949365a6d467363325639)
 
 ### Technologies used:
-- HTML5, CSS3
-- SCSS: Grid, Flexbox, modals, animation, Bootstrap 4, media query
-- React / Node: components, Router, loops, math / randomization, array methods, custom classes, callbacks, event listeners
-- APIs: [Pubnub](https://www.pubnub.com/blog/javascript-multiplayer-game/) (online multiplayer), [Phaser 3](http://phaser.io/) (game engine).
+- SCSS: CSS Grid, Flexbox, animation, media query, mixins, variables
+- React / Node: components, array methods, custom classes, callbacks, event listeners, esm node server
+- [Material-UI](https://material-ui.com/): component library that supplied the cards, buttons, alerts, and icons.
+- [`notistack`](https://www.iamhosseindhv.com/notistack): library that pushes multiple snackbar notifications on top of each other
+- [`boardgame.io`](https://boardgame.io/): API/framework that manages game state and integrates multiplayer functionality
+- [Websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API): API that allows for two-way communications between clients via a server.
+
 ___
 
 
-## Lessons/Ongoing Issues:
+## Lessons/Ongoing Issues
+[] Notifications are showing the wrong player name
 
-<details>
-  <summary>(copypasta)</summary>
-  
-### Creating a responsive, interactive map in the browser
-  - At first, I tried using media queries to adjust event handler locations for each city over a static map background. This was nearly impossible with 48 different locations!
-  - Next, I created a static diagram of the city locations with a gigantic table underneath to store the data. I realized that tables are the WORST and my page was too busy/cluttered.
-  - Then I spent many hours trying to create an interactive map from scratch with the Google Developer Data Visualization tools. If I had unlimited time to devote to this project, I would have continued, but I decided to take a step back to focus more on my gameplay logic with the time remaining.
-  - Final compromise: I created a map with "Snazzy Maps" online repository which provides a simpler visual representation of city locations. Unfortunately, interacting with this map does not affect gameplay.
-  
- ### Focusing on user experience
-  - At first I approached this project as a strict adaptation of the Pandemic board game. Over time I came to realize that this was not a good idea. Even after eliminating some of the trickier elements, trying to literally translate a complex strategy game onto the computer screen didn't make sense: the page was completely cluttered, and even someone who had played the board game before would not have understood how to interact with the site. It was as though I was trying to adapt a book into a movie, and shot each scene as a literal transcript of the written page: it was exhausting to make and exhausting for the user. 
-  - Lesson learned: when you are adapting something into an application, whether it's a board game or a client's desired specifications, don't try to translate it line-by-line. Consider user experience first, and adapt from there.
-  - Current status: I'm not 100% happy with how my user experience turned out: I think I could simplify gameplay and the user interface a lot more in the future. Incorporating an interactive map (see above) would help a lot.
+[] Showing the choice card shifts the board rightward
 
-</details>
+### Pride
+- While this isn't how they *want* us to use it, I used the `bgio` framework's handling of possible moves to be almost a method for their game state
+
+- w e b s o c k e t
