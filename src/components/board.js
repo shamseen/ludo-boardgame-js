@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BoardRegion } from "./boardRegion";
+import PersonIcon from '@material-ui/icons/Person';
 import "../styles/board.scss";
 
 
@@ -9,7 +10,7 @@ export default function Board({ G, ctx, moves, alertUsers }) {
     // setting up each segment of path
     const [regionProps, setRegionProps] = useState([]);
 
-    /* --- Board layout only on initial render --- */
+    /* --- Board layout re-renders when pieces move --- */
     // warning - this layout is WEIRD
     useEffect(() => {
         // temp obj for state
@@ -46,7 +47,11 @@ export default function Board({ G, ctx, moves, alertUsers }) {
         let addTo = '';
         for (let i = 0; i < G.pathLength; i++) {
             // new space for board
-            const spaceDiv = <div className="space path" id={i} key={i}></div>;
+            const spaceDiv = <div className="space path" id={i} key={i}>
+                <div className={`piece-container ${G.spaces[i]}`}>
+                    <PersonIcon />
+                </div>
+            </div>;
 
             /*  assigning spaces to grids (see wireframe) */
             // first half of arm1
@@ -115,12 +120,11 @@ export default function Board({ G, ctx, moves, alertUsers }) {
 
         /* --- Updating state with child components --- */
         setRegionProps([...regions]);
-    }, []);
+    }, G.spaces);
 
 
     /* --- Event handlers --- */
     const onDiceRoll = () => {
-        console.log('============roll')
         alertUsers('roll');
         moves.rollDice();
     }

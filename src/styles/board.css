@@ -227,6 +227,30 @@
   color: black;
 }
 
+.space .piece-container {
+  visibility: hidden;
+}
+
+.space .piece-container:not(.empty) {
+  visibility: visible;
+}
+
+.space .piece-container .red {
+  color: #b30000;
+}
+
+.space .piece-container .yellow {
+  color: #f7910c;
+}
+
+.space .piece-container .blue {
+  color: #896ce5;
+}
+
+.space .piece-container .green {
+  color: #48fc68;
+}
+
 .space.highLight {
   opacity: 0.3;
   -webkit-transition: .5s ease;

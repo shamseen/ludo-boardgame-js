@@ -9,7 +9,7 @@ export default function SimpleSnackbar({ G, alertData }) {
 
     // setting alert message based on move just played
     useEffect(() => {
-        console.log('alert trigger ------------------')
+
         let msg = `${G.currentPlayer.color} player `;
         switch (alertData.move) {
             case 'roll':

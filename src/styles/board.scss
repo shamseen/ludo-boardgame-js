@@ -214,6 +214,29 @@ $armW: $cell*3;
     &[class*="yellow"] {
       @include playerStyle('yellow');
     }
+
+    .piece-container{
+      visibility: hidden;
+
+      &:not(.empty){
+        visibility: visible;
+      }
+      .red{
+        color: rgb(179, 0, 0)
+      }
+
+      .yellow{
+        color: rgb(247, 145, 12);
+      }
+
+      .blue{
+        color: rgb(137,108,229);
+      }
+      .green{
+       color: rgb(72, 252, 104);
+      }
+    }
+    
   
     /* highlight space on btn hover! */
     // // animation not working >:( 

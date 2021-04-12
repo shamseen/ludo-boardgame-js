@@ -2,6 +2,15 @@
 // takes state, metadata, any other data needed
 const Moves = {
     movePiece: (G, ctx, pieceId, spaces) => {
+        const oldSp = G.currentPlayer.pieces[pieceId]
+
+        // empty out old space
+        G.spaces[oldSp] = "empty";
+
+        // fill new space
+        G.spaces[oldSp + spaces] = G.currentPlayer.color
+
+        // update player state
         G.currentPlayer.pieces[pieceId] += spaces;
         G.players[ctx.currentPlayer] = G.currentPlayer;
         console.log('moved piece ' + pieceId + ' to space ' + G.currentPlayer.pieces[pieceId])
@@ -10,9 +19,13 @@ const Moves = {
 
     moveToStart: (G, ctx, pieceId) => {
         console.log('moved to start - ' + ctx.currentPlayer);
+
         G.currentPlayer.pieces[pieceId] = G.currentPlayer.startSpace;
         G.currentPlayer.activePieces++;
         G.players[ctx.currentPlayer] = G.currentPlayer;
+
+        // add piece to board
+        G.spaces[G.currentPlayer.startSpace] = G.currentPlayer.color;
     },
 
     rollDice: (G, ctx) => {

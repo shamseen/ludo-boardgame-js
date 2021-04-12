@@ -15,17 +15,17 @@ const Ludo = {
             currentPlayer: {},
             newMove: '',
             moveTrigger: false,
-            spaces: Array(44).fill(null),
+            spaces: Array(44).fill("empty"),
             homeStretch: [
                 // TO DO: store player info?
-                [Array(4).fill(null)],
-                [Array(4).fill(null)],
-                [Array(4).fill(null)],
-                [Array(4).fill(null)]
+                [Array(4).fill("empty")],
+                [Array(4).fill("empty")],
+                [Array(4).fill("empty")],
+                [Array(4).fill("empty")]
             ]
             // TO DO: bases
         }
-
+        
         /* ---- Player state ---- */
         // only 2 players for now
         let playerProps = [

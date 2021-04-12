@@ -19,8 +19,6 @@ export default function GameView({ G, ctx, moves }) {
             pieceId: pieceId,
             spaces: spaces
         });
-
-        console.log(' new move =======================');
     }
     return (
         <div className="gameView">
