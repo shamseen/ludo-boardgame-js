@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BoardRegion } from "./boardRegion";
+import Button from '@material-ui/core/Button';
 import PersonIcon from '@material-ui/icons/Person';
 import "../styles/board.scss";
 
@@ -146,9 +147,9 @@ export default function Board({ G, ctx, moves, alertUsers }) {
             {/* <!-- dice btn => tied to game state move --> */}
             <div className="home">
                 <div className="roll-dice">
-                    <button className="btn" id="collapsed" onClick={onDiceRoll}>
-                        <div id="rollTxt">Roll dice!</div>
-                    </button>
+                    <Button variant="outlined" onClick={onDiceRoll} className={G.currentPlayer.color}>
+                        Roll dice!
+                    </Button>
                 </div>
             </div>
         </div>

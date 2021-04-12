@@ -24,7 +24,7 @@ export default function GameView({ G, ctx, moves }) {
         <div className="gameView">
             <ChoicesPanel G={G} moves={moves} player={ctx.currentPlayer} alertUsers={alertUsers} />
             <Board G={G} ctx={ctx} moves={moves} alertUsers={alertUsers} />
-            <SnackbarProvider maxSnack={5}>
+            <SnackbarProvider maxSnack={5} autoHideDuration={2000}>
                 <AlertToasts alertData={alertData} G={G} />
             </SnackbarProvider>
         </div>

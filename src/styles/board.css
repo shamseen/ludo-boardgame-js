@@ -290,20 +290,30 @@
   width: 85%;
   height: 70%;
   cursor: pointer;
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-transform: none;
 }
 
-.roll-dice #rollTxt {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  font-size: 16px;
-  line-height: 32px;
-  margin-left: 10px;
+.roll-dice button.red {
+  background-color: #fc4848;
+  border-color: #b30000;
+  color: white;
+}
+
+.roll-dice button.green {
+  background-color: #48fc68;
+  border-color: #00c80a;
+  color: white;
+}
+
+.roll-dice button.blue {
+  background-color: #896ce5;
+  border-color: #4c3b68;
+  color: white;
+}
+
+.roll-dice button.yellow {
+  background-color: #ffc83d;
+  border-color: #f7910c;
+  color: black;
 }
 /*# sourceMappingURL=board.css.map */

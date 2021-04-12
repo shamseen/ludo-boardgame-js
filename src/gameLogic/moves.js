@@ -55,27 +55,6 @@ const Moves = {
         G.newMove = move;
         G.moveTrigger = !G.moveTrigger;
     },
-
-    /* --- State get functionality --- */
-
-    getPieceBySpace: (G, ctx, space) => {
-        return G.currentPlayer.pieces.find(p => {
-            p.spaceNum === space;
-        })
-    },
-
-
-    /* --- DEBUGGING ONLY --- */
-    getPlayers: (G, ctx, str) => {
-        let print;
-        switch (str) {
-            case "c": print = ctx; break;
-            case "s": print = ctx.player.state; break;
-            default: print = ctx.player; break;
-        }
-        console.log(JSON.stringify(print, null, 2));
-        return print;
-    }
 }
 
 export default Moves;

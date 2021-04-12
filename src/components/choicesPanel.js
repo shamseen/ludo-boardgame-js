@@ -34,17 +34,6 @@ export default function ChoicesPanel({ G, moves, player, alertUsers }) {
 
             {modalData.show ? <ChoiceCard G={G} pieces={modalData.pieces} clicked={buttonClicked} /> : ''}
 
-            <div className="card" id="chooseCard">
-                <div className="card-header">Choose</div>
-                <div className="card card-content">
-                    {/* <!-- src: https://getbootstrap.com/docs/4.0/components/buttons/#checkbox-and-radio-buttons --> */}
-                    <div
-                        className="btn-group"
-                        role="group"
-                    ></div>
-                </div>
-            </div>
-
             {/* <!-- TO DO: Split roll --> */}
             {/* <div className="card" id="rollA">
                 <div className="card-header">Which piece should move {G.roll.A} spaces?</div>

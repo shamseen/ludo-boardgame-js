@@ -33,253 +33,258 @@ $armW: $cell*3;
 }
 
 .board {
-    display: grid;
-    grid-template-columns: $armL $armW $armL;
-    grid-template-rows: $armL $armW $armL;
-    gap: 0px 0px;
-    grid-template-areas:
-      "base-red arm-2 base-yellow"
-      "arm-1 home arm-3"
-      "base-blue arm-4 base-green";
-    grid-area: board;
-    position: relative;
-    height: 100vh;
-  }
-  .base-red {
-    grid-area: base-red;
-  }
-  
-  .base-yellow {
-    grid-area: base-yellow;
-  }
-  
-  .base-blue {
-    grid-area: base-blue;
-  }
-  
-  .base-green {
-    grid-area: base-green;
-  }
-  
-  [class*='arm']{
-    box-shadow: 
-    0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  
-  }
-  // horizontal arms
-  .arm-1 {
-    display: grid;
-    grid-template: repeat(3, $cell) / repeat(5, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . . . ."
-      ". home-red home-red home-red home-red"
-      ". . . . .";
-    grid-area: arm-1;
-  }
-  
-  .arm-3 {
-    display: grid;
-    grid-template: repeat(3, $cell) / repeat(5, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . . . ."
-      "home-green home-green home-green home-green ."
-      ". . . . .";
-    grid-area: arm-3;
-  }
-  
-  .arm-2 {
-    display: grid;
-    grid-template: repeat(5, $cell) / repeat(3, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". . ."
-      ". home-yellow ."
-      ". home-yellow ."
-      ". home-yellow ."
-      ". home-yellow .";
-    grid-auto-flow: column;
-    grid-area: arm-2;
-  }
-  
-  // vertical arms
-  .arm-4 {
-    display: grid;
-    grid-template: repeat(5, $cell) / repeat(3, $cell);
-    gap: 0px 0px;
-    grid-template-areas:
-      ". home-blue ."
-      ". home-blue ."
-      ". home-blue ."
-      ". home-blue ."
-      ". . .";
-    grid-auto-flow: column;
-    grid-area: arm-4;
-  }
-  
-  // horizontal lanes
-  .home-red {
-    display: grid;
-    grid-template: $cell / $cell;
-    gap: 0px 0px;
-    grid-template-areas: ".";
-    grid-auto-flow: row;
-    grid-area: home-red;
-  
-    .homeLn-container {
-      display: flex;
-      flex-flow: row;
-    }
-  }
-  
-  .home-green {
-    display: grid;
-    grid-template: $cell / $cell;
-    gap: 0px 0px;
-    grid-template-areas: ".";
-    grid-auto-flow: row;
-    grid-area: home-green;
-  
-    .homeLn-container {
-      display: flex;
-      flex-flow: row;
-    }
-  }
-  
-  // vertical lanes
-  .home-yellow {
-    display: grid;
-    grid-template: repeat(4, $cell) / $cell;
-    gap: 0px 0px;
-    grid-template-areas:
-      "."
-      "."
-      "."
-      ".";
-    grid-auto-flow: column;
-    grid-area: home-yellow;
-  }
-  
-  .home-blue {
-    display: grid;
-    grid-template: repeat(4, $cell) / $cell;
-    gap: 0px 0px;
-    grid-template-areas:
-      "."
-      "."
-      "."
-      ".";
-    grid-auto-flow: column;
-    grid-area: home-blue;
-  }
-  
-  .home {
-    display: grid;
-    grid-template: $cell / $cell;
-    gap: 0px 0px;
-    grid-template-areas: ".";
-    grid-area: home;
-  }
-  
-  * {
-    z-index: 0;
-  }
-  
-  .space {
-    display: block;
-    height: auto;
-    background: center / contain no-repeat;
-    margin: 0;
-    border: 1px solid;
-    height: min($square);
-    width: min($square);
-    opacity: 0.7;
-  
-    &.path {
-      background-color: #e7e5db;
-      border-color: grey;
-    }
-  
-    &[class*="red"] {
-      @include playerStyle('red');
-    }
-  
-    &[class*="green"] {
-      @include playerStyle('green');
-    }
-    &[class*="blue"] {
-      @include playerStyle('blue');
-    }
-    &[class*="yellow"] {
-      @include playerStyle('yellow');
-    }
+  display: grid;
+  grid-template-columns: $armL $armW $armL;
+  grid-template-rows: $armL $armW $armL;
+  gap: 0px 0px;
+  grid-template-areas:
+    "base-red arm-2 base-yellow"
+    "arm-1 home arm-3"
+    "base-blue arm-4 base-green";
+  grid-area: board;
+  position: relative;
+  height: 100vh;
+}
+.base-red {
+  grid-area: base-red;
+}
 
-    .piece-container{
-      visibility: hidden;
+.base-yellow {
+  grid-area: base-yellow;
+}
 
-      &:not(.empty){
-        visibility: visible;
-      }
-      .red{
-        color: rgb(179, 0, 0)
-      }
+.base-blue {
+  grid-area: base-blue;
+}
 
-      .yellow{
-        color: rgb(247, 145, 12);
-      }
+.base-green {
+  grid-area: base-green;
+}
 
-      .blue{
-        color: rgb(137,108,229);
-      }
-      .green{
-       color: rgb(72, 252, 104);
-      }
-    }
-    
-  
-    /* highlight space on btn hover! */
-    // // animation not working >:( 
-    // // https://stackoverflow.com/questions/51468351/bootstrap-hover-overlay-via-css-is-bigger-than-image/51469585
-    &.highLight{
-      opacity: 0.3;
-      transition: .5s ease;
-    }
-  
-    .overlay {
-      // position: absolute;
-      top: 0;
-      bottom: 0;
-      height: $cell;
-      width: $cell;
-      opacity: 0.6;
-      transition: .5s ease;
-      z-index: 1;
-  
-      // bg color needs bootstrap => see main.scss
-    }
-  }
-  
-  .roll-dice {
-    background: #dedbdf;
-    position: relative;
+[class*='arm']{
+  box-shadow: 
+  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+// horizontal arms
+.arm-1 {
+  display: grid;
+  grid-template: repeat(3, $cell) / repeat(5, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . ."
+    ". home-red home-red home-red home-red"
+    ". . . . .";
+  grid-area: arm-1;
+}
+
+.arm-3 {
+  display: grid;
+  grid-template: repeat(3, $cell) / repeat(5, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . . ."
+    "home-green home-green home-green home-green ."
+    ". . . . .";
+  grid-area: arm-3;
+}
+
+.arm-2 {
+  display: grid;
+  grid-template: repeat(5, $cell) / repeat(3, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . ."
+    ". home-yellow ."
+    ". home-yellow ."
+    ". home-yellow ."
+    ". home-yellow .";
+  grid-auto-flow: column;
+  grid-area: arm-2;
+}
+
+// vertical arms
+.arm-4 {
+  display: grid;
+  grid-template: repeat(5, $cell) / repeat(3, $cell);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". home-blue ."
+    ". home-blue ."
+    ". home-blue ."
+    ". home-blue ."
+    ". . .";
+  grid-auto-flow: column;
+  grid-area: arm-4;
+}
+
+// horizontal lanes
+.home-red {
+  display: grid;
+  grid-template: $cell / $cell;
+  gap: 0px 0px;
+  grid-template-areas: ".";
+  grid-auto-flow: row;
+  grid-area: home-red;
+
+  .homeLn-container {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  
-    button {
-      width: 85%;
-      height: 70%;
-      cursor: pointer;
-      box-shadow: 
-    0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    flex-flow: row;
+  }
+}
+
+.home-green {
+  display: grid;
+  grid-template: $cell / $cell;
+  gap: 0px 0px;
+  grid-template-areas: ".";
+  grid-auto-flow: row;
+  grid-area: home-green;
+
+  .homeLn-container {
+    display: flex;
+    flex-flow: row;
+  }
+}
+
+// vertical lanes
+.home-yellow {
+  display: grid;
+  grid-template: repeat(4, $cell) / $cell;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+  grid-auto-flow: column;
+  grid-area: home-yellow;
+}
+
+.home-blue {
+  display: grid;
+  grid-template: repeat(4, $cell) / $cell;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    "."
+    "."
+    ".";
+  grid-auto-flow: column;
+  grid-area: home-blue;
+}
+
+.home {
+  display: grid;
+  grid-template: $cell / $cell;
+  gap: 0px 0px;
+  grid-template-areas: ".";
+  grid-area: home;
+}
+
+* {
+  z-index: 0;
+}
+
+.space {
+  display: block;
+  height: auto;
+  background: center / contain no-repeat;
+  margin: 0;
+  border: 1px solid;
+  height: min($square);
+  width: min($square);
+  opacity: 0.7;
+
+  &.path {
+    background-color: #e7e5db;
+    border-color: grey;
+  }
+
+  &[class*="red"] {
+    @include playerStyle('red');
+  }
+
+  &[class*="green"] {
+    @include playerStyle('green');
+  }
+  &[class*="blue"] {
+    @include playerStyle('blue');
+  }
+  &[class*="yellow"] {
+    @include playerStyle('yellow');
+  }
+
+  .piece-container{
+    visibility: hidden;
+
+    &:not(.empty){
+      visibility: visible;
     }
-    #rollTxt {
-      display: flex;
-      flex-direction: row;
-      font-size: 16px;
-      line-height: 32px;
-      margin-left: 10px;
+    .red{
+      color: rgb(179, 0, 0)
+    }
+
+    .yellow{
+      color: rgb(247, 145, 12);
+    }
+
+    .blue{
+      color: rgb(137,108,229);
+    }
+    .green{
+      color: rgb(72, 252, 104);
+    }
+  }
+  
+
+  /* highlight space on btn hover! */
+  // // animation not working >:( 
+  // // https://stackoverflow.com/questions/51468351/bootstrap-hover-overlay-via-css-is-bigger-than-image/51469585
+  &.highLight{
+    opacity: 0.3;
+    transition: .5s ease;
+  }
+
+  .overlay {
+    // position: absolute;
+    top: 0;
+    bottom: 0;
+    height: $cell;
+    width: $cell;
+    opacity: 0.6;
+    transition: .5s ease;
+    z-index: 1;
+
+    // bg color needs bootstrap => see main.scss
+  }
+}
+
+.roll-dice {
+  background: #dedbdf;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 85%;
+    height: 70%;
+    cursor: pointer;
+    text-transform: none;
+    &.red {
+      @include playerStyle('red');
+      }
+    
+    &.green {
+        @include playerStyle('green');
+      }
+     &.blue {
+        @include playerStyle('blue');
+      }
+    &.yellow {
+        @include playerStyle('yellow');
+      }
     }
   }
