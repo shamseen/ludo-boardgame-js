@@ -20,6 +20,7 @@ export default function GameView({ G, ctx, moves }) {
             spaces: spaces
         });
     }
+
     return (
         <div className="gameView">
             <ChoicesPanel G={G} moves={moves} player={ctx.currentPlayer} alertUsers={alertUsers} />
@@ -28,5 +29,5 @@ export default function GameView({ G, ctx, moves }) {
                 <AlertToasts alertData={alertData} G={G} />
             </SnackbarProvider>
         </div>
-    )
+    );
 }

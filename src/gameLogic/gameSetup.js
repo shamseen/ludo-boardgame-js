@@ -1,6 +1,7 @@
 import GameView from "../components/gameView.js";
 import Moves from "./moves.js";
 import { Client } from "boardgame.io/react";
+import { SocketIO } from 'boardgame.io/multiplayer'
 
 /* ---- Game object ---- */
 const Ludo = {
@@ -97,7 +98,7 @@ export const GameClient = Client(
         game: Ludo, // game state
         board: GameView,
         numPlayers: 2,
-        debug: true
-        // TODO: remove debug panel
+        debug: true,
+        // multiplayer: SocketIO({ server: "localhost:8000" })
     }
 );

@@ -19,3 +19,11 @@ html {
     margin: 2vh;
     max-height: 100vh;
   }
+
+  .App > .MuiCard-root {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 5%;
+      width: fit-content;
+  }
