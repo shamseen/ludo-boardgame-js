@@ -19,7 +19,7 @@ export default function App() {
                 <Button variant="outlined" className='red' onClick={() => setPlayerId('0')}>
                     Player 1
                 </Button>
-                <Button variant="outlined   " className='yellow' onClick={() => setPlayerId('1')}>
+                <Button variant="outlined" className='yellow' onClick={() => setPlayerId('1')}>
                     Player 2
                 </Button>
             </Card>);
@@ -30,8 +30,8 @@ export default function App() {
     }, [playerId])
     return (
         <div className="App">
-            {/* {view} */}
-            <GameClient />
+            {view}
+            {/* <GameClient /> */}
         </div>
     );
 }

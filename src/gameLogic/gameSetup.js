@@ -4,7 +4,7 @@ import { Client } from "boardgame.io/react";
 import { SocketIO } from 'boardgame.io/multiplayer'
 
 /* ---- Game object ---- */
-const Ludo = {
+export const Ludo = {
     // constructor
     setup: (ctx) => {
         let initialState = {
@@ -99,6 +99,14 @@ export const GameClient = Client(
         board: GameView,
         numPlayers: 2,
         debug: true,
-        // multiplayer: SocketIO({ server: "localhost:8000" })
+        multiplayer: SocketIO({ server: "localhost:8000" }),
+
+        // multiplayer: Local({
+        //     // Enable localStorage cache.
+        //     persist: true,
+
+        //     // Set custom prefix to store data under. Default: 'bgio'.
+        //     storageKey: 'bgio',
+        // })
     }
 );
