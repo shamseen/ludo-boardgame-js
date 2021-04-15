@@ -8,8 +8,8 @@ import "../styles/app.scss";
 
 // takes game state, game metadata, possible moves
 export default function GameView({ G, ctx, moves }) {
-    const [alertData, setAlert] = useState({});
 
+    const [alertData, setAlert] = useState({});
     const alertUsers = (move, pieceId = null, spaces = null) => {
         // trigger <AlertToasts /> useEffect
         moves.setNewMove(move);

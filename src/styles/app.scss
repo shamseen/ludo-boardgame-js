@@ -23,7 +23,14 @@ html {
   .App > .MuiCard-root {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-between;
+      align-items: center; 
       padding: 5%;
       width: fit-content;
+      background-color: #444140;
+      color: #F7EBE8;
+
+      *{
+          margin: 10px;
+      }
   }
