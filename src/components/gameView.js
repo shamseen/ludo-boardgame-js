@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Switch, Route } from 'react-router-dom';
+import { usePubNub } from 'pubnub-react';
 import Board from "./board.js";
 import AlertToasts from "./alertToasts.js";
 import ChoicesPanel from "./choicesPanel.js";
@@ -8,8 +10,10 @@ import "../styles/app.scss";
 
 // takes game state, game metadata, possible moves
 export default function GameView({ G, ctx, moves }) {
-    const [alertData, setAlert] = useState({});
+    /* ---- Multiplayer functionality ---- */
+    // const pubnub = usePubNub();
 
+    const [alertData, setAlert] = useState({});
     const alertUsers = (move, pieceId = null, spaces = null) => {
         // trigger <AlertToasts /> useEffect
         moves.setNewMove(move);
